@@ -1,0 +1,94 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background: linear-gradient(to left, #004C94, #002d47);
+}
+
+header {
+    margin: 10px 10px;
+}
+
+footer {
+    margin-bottom: 10px;
+}
+
+
+#scroll-table {
+    height: 250px;
+    overflow: auto;
+    margin-bottom: 50px;
+}
+
+/*Convocatoria - ModificarConvocatoria.*/
+#modificar {
+    max-width: 500px;
+    padding: 20px 40px;
+    margin: 0 auto 25px;
+}
+
+/*Convocatoria - VerConvocatoria.*/
+#detalle {
+    max-width: 500px;
+    padding: 20px 40px;
+    margin: 0 auto 25px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+/*#bordos {
+    border: 1px solid white;
+}*/
+
+/*Convocatoria - NuevaConvocatoria.*/
+#nuevo {
+    width: 95%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow:row wrap;
+    /*flex-wrap: wrap;*/
+    justify-content: space-between;
+}
+
+#input-100 {
+    width: 100%;
+    padding: 10px 0px;
+}
+
+#input-50 {
+    width: 45%;
+    padding: 10px 0px;
+}
+
+#input-70 {
+    width: 70%;
+    padding: 10px 0px;
+}
+
+#botones {
+    width: 30%;
+    padding: 31px 20px;
+}
+
+/*Persona- NuevoUsuario.*/
+#newuser {
+    width: 95%;
+    max-width: 400px;
+    margin: 0 auto;
+
+}

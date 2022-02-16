@@ -1,0 +1,49 @@
+﻿@model List<SistemaElectoral.Models.Convocatoria>
+
+@{
+    ViewBag.Title = "Convocatoria";
+}
+
+<h2 class="text-light text-center">LISTA DE CONVOCATORIAS</h2>
+
+<p>
+    <a asp-action="Nuevo" class="text-light">CREAR NUEVA CONVOCATORIA</a> 
+    @*@Html.ActionLink("CREAR NUEVA CONVOCATORIA", "Nuevo", "Convocatoria", null, new { @class="text-light" })*@
+</p>
+
+<div id="scroll-table" class="table-responsive">
+    <table class="table text-light table-bordered">
+        <tr class="text-center">
+            @*<th>Id</th>*@
+            <th>NOMBRE</th>
+            <th>FECHA INICIO</th>
+            <th>FECHA FIN</th>
+            <th>OPCIONES</th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                @*<td>
+                    @item.id
+                </td>*@
+                <td>
+                    @item.nombre
+                </td>
+                <td>
+                    @item.fecha_inicio
+                </td>
+                <td>
+                    @item.fecha_fin
+                </td>
+                <td class="text-center">
+                    <a asp-action="Modificar" asp-route-id="@item.id" class="text-light">MODIFICAR</a> |
+                    <a asp-action="Detalle" asp-route-id="@item.id" class="text-light">VER</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.id" class="text-light">ELIMINAR</a> 
+                    @*@Html.ActionLink("MODIFICAR", "Modificar", new {id=item.id }, new { @class="text-light" }) |*@
+                    @*@Html.ActionLink(" VER ", "Detalle", new { id=item.id }, new { @class="text-light" }) |*@
+                    @*@Html.ActionLink(" ELIMINAR ", "Eliminar", new { id=item.id }, new { @class="text-light" })*@
+                </td>
+            </tr>
+        }
+    </table>
+</div>

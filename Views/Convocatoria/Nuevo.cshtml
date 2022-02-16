@@ -1,0 +1,82 @@
+﻿@using System.Data
+@model SistemaElectoral.Models.Convocatoria
+
+@{
+    ViewBag.Title = "Convocatoria";
+}
+
+<h2 class="text-light text-center mb-4">CREAR NUEVA CONVOCATORIA</h2>
+
+<form id="nuevo"asp-action="Guardar" method="post">
+
+    @*<div class="col-sm-12 col-md-12 col-lg-12">*@
+
+        <div class="form-group" id="input-100">
+            <label class="text-light">NOMBRE</label>
+            @Html.EditorFor(m => m.nombre, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group" id="input-50">
+            <label class="text-light">FECHA INICIO</label>
+            @Html.EditorFor(m => m.fecha_inicio, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group" id="input-50">
+            <label class="text-light">FECHA FIN</label>
+            @Html.EditorFor(m => m.fecha_fin, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        @*<div class="form-group" id="input-50">
+            <label class="text-light">COMITE</label>
+            <select asp-for="fk_id_comite" class="form-control">
+                @foreach(DataRow row in (ViewData["Comite"] as DataTable).Rows)
+                {
+                    <option value="@row[0].ToString()">@row[1].ToString()</option>
+                }
+            </select>
+        </div>*@
+
+        <div class="form-group" id="input-50">
+            <label class="text-light">CARGO</label>
+            <select asp-for="fk_id_cargo" asp-items="@(new SelectList( (ViewData["Cargo"] as List<CargoModel>), "id", "nombre" ))" class="form-control"></select>
+        </div>
+
+        <div class="form-group" id="input-50">
+            <label class="text-light">COMITE</label>
+            <select asp-for="fk_id_comite" asp-items="@(new SelectList( (ViewData["Comite"] as List<ComiteModel>), "id", "nombre" ))" class="form-control"></select>
+        </div>
+
+        @*<div class="form-group" id="input-50">
+            <label class="text-light">ELECCION</label>
+            <select asp-for="fk_id_comite" class="form-control">
+                @foreach(DataRow row in (ViewData["Eleccion"] as DataTable).Rows)
+                {
+                    <option value="@row[0].ToString()">@row[1].ToString() - @row[2].ToString()</option>
+                }
+            </select>
+        </div>*@
+
+        @*<div class="form-group" id="input-70">
+            <label class="text-light">AGREGAR CONDICIONES</label>
+            <select asp-for="fk_id_comite" class="form-control">
+                @foreach(DataRow row in (ViewData["Condicion"] as DataTable).Rows)
+                {
+                    <option value="@row[0].ToString()">@row[1].ToString()</option>
+                }
+            </select>
+        </div>*@
+
+        <div class="form-group" id="botones">
+            <button class="btn btn-light">Agregar</button>
+        </div>
+
+    @*</div>*@
+
+</form>
+<div class="form-group text-center">
+    <button class="btn btn-light" type="submit">Crear</button>
+</div>
+
+<div class="text-lg-end">
+    <a asp-action="Index" class="text-light">VOLVER</a>
+</div>

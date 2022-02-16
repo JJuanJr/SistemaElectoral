@@ -1,0 +1,73 @@
+﻿@using SistemaElectoral.Data
+@model SistemaElectoral.Models.Convocatoria
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2 class="text-light text-center">DETALLE CONVOCATORIA</h2>
+
+    @*<hr/>*@
+
+<div>
+    <dl id="detalle" class="text-light">
+        <dt class="form-group" id="input-50">
+            ID
+        </dt>
+        <dd class="form-group" id="input-50">
+            @Model.id
+        </dd>
+           
+         <dt class="form-group" id="input-50">
+            NOMBRE
+        </dt>
+        <div class="form-group" id="input-50">
+            @Model.nombre 
+        </div>
+        
+        <dt class="form-group" id="input-50">
+            FECHA INICIO
+        </dt>
+        <dd class="form-group" id="input-50">
+            @Model.fecha_inicio
+        </dd>
+        
+        <dt class="form-group" id="input-50">
+            FECHA FIN
+        </dt>
+        <dd class="form-group" id="input-50">
+            @Model.fecha_fin
+        </dd>
+
+         <dt class="form-group" id="input-50">
+            CARGO
+        </dt>
+        <dd class="form-group" id="input-50">
+            @CargoData.ObtenerNombreCargo(Model.fk_id_cargo)
+        </dd>
+
+         <dt class="form-group" id="input-50">
+            FECHA VOTACIÓN
+        </dt>
+        <dd class="form-group" id="input-50">
+            @EleccionData.ObtenerFecha(Model.fk_id_eleccion)
+            @*@Model.fk_id_eleccion*@
+        </dd>
+        <dt class="text-center" id="input-100">
+            CONDICIONES
+        </dt>
+        <dd class="form-group form-control">
+            + <br />
+            + <br />
+            +
+        </dd>
+    </dl>
+
+    <div class="text-center">
+    <a asp-action="Inscriptos" asp-route-id="@Model.id" class="text-light ">VER INSCRITOS</a> 
+    </div>
+ 
+</div>
+<div class="text-lg-end">
+    <a asp-action="Index" asp-route-id="@Model.id" class="text-light">VOLVER</a>
+</div>

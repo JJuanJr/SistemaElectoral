@@ -1,0 +1,39 @@
+﻿@model List<SistemaElectoral.Models.PersonaModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-light text-center">Lista de usuarios</h2>
+
+<p>
+    @Html.ActionLink("CREAR NUEVO", "Nuevo", "Persona", null, new { @class="text-light" })
+</p>
+
+<div id="scroll-table" class="table-responsive">
+    <table class="table text-light table-bordered">
+        <tr >
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EDAD</th>
+            <th>GENERO</th>
+            @*<th>OPCIONES</th>*@
+        </tr>
+
+        @foreach(var item in Model) {
+            <tr>
+                <td>@Html.DisplayFor(model => item.id)</td>
+                <td>@Html.DisplayFor(model => item.nombre)</td>
+                <td>@Html.DisplayFor(model => item.apellido)</td>
+                <td>@Html.DisplayFor(model => item.edad)</td>
+                <td>@Html.DisplayFor(model => item.genero)</td>
+                @*<td>
+                    @Html.ActionLink("Modificar", "Modificar", new { id=item.id }) |
+                    @Html.ActionLink("Ver", "Detalle", new { id=item.id }) |
+                    @Html.ActionLink("Eliminar", "Eliminar", new { id=item.id })
+                </td>*@
+            </tr>
+        }
+    </table>
+</div>
