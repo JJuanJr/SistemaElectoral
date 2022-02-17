@@ -1,0 +1,37 @@
+﻿@model List<SistemaElectoral.Models.PersonaModel>
+
+@{
+    ViewData["Title"] = "Inscriptos";
+}
+
+<h2 class="text-light text-center">PARTICIPANTES DEL EQUIPO</h2>
+
+<div id="scroll-table" class="table-responsive">
+    <table class="table text-light table-bordered">
+        <tr class="text-center">
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EDAD</th>
+            <th>GENERO</th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @item.nombre
+                </td>
+                <td>
+                    @item.apellido
+                </td>
+                <td>
+                    @item.edad
+                </td>
+                <td>
+                    @item.genero
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<a asp-action="Index" asp-controller="Convocatoria" class="text-light">VOLVER</a>

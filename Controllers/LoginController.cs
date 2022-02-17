@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaElectoral.Datos.Login;
 using SistemaElectoral.Models;
-using System.Diagnostics;
 
 namespace SistemaElectoral.Controllers
 {
@@ -11,10 +10,10 @@ namespace SistemaElectoral.Controllers
         
         public ActionResult Index()
         {
+            ViewBag.Invalido = "";
             return View();
         }
 
-        //[HttpPost]
         public ActionResult Validar(LoginModel modelo)
         {
             bool flag = LoginData.Validar(modelo.user, modelo.password);
@@ -22,6 +21,7 @@ namespace SistemaElectoral.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.Invalido = "¡Usuario no encontrado!";
             return View("Index");
         }
 

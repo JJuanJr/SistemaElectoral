@@ -24,7 +24,7 @@
                     @EquipoData.ObtenerNombreEquipo(item.fk_id_partido)
                 </td>
                 <td class="text-center">
-                    <a class="text-light">VER</a>
+                    <a asp-action="Inscriptos" asp-controller="Equipo" asp-route-id="@item.id" class="text-light">VER</a>
                 </td>
             </tr>
         }

@@ -38,12 +38,7 @@
 
     <div class="form-group m-3">
         <label class="text-light">ROL</label>
-        <select asp-for="fk_id_rol" class="form-control">
-            @foreach(DataRow row in (ViewData["Rol"] as DataTable).Rows)
-            {
-                <option value="@row[0].ToString()">@row[1].ToString()</option>
-            }
-        </select>
+        <select asp-for="fk_id_rol" asp-items="@(new SelectList( (ViewData["Rol"] as List<RolModel>), "id", "nombre" ))" class="form-control"></select>
     </div>
     <div class="form-group m-3 text-center">
         <button class="btn btn-light" type="submit">Guardar</button>

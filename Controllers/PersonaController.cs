@@ -10,6 +10,7 @@ namespace SistemaElectoral.Controllers
 {
     public class PersonaController : Controller
     {
+
         public IActionResult Index()
         {
             List<PersonaModel> lista = PersonaData.Consultar();
@@ -19,19 +20,16 @@ namespace SistemaElectoral.Controllers
 
         public IActionResult Nuevo()
         {
-            string sql = "";
-
-            sql = "select id, nombre ";
-            sql += "from rol";
-            //sql += "where estado='Activo'";
-            DataTable rol = Conexion.EjecutarSelectMysql(sql);
-            ViewData["Rol"] = rol;
+            List<RolModel> lista = RolData.Consultar();
+            ViewData["Rol"] = lista;
             return View();
         }
-
+        
         public IActionResult Guardar(PersonaModel modelo)
         {
             PersonaData.Guardar(modelo);
+            List<RolModel> lista = RolData.Consultar();
+            ViewData["Rol"] = lista;
             return View("Nuevo");
         }
     }

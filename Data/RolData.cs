@@ -24,6 +24,7 @@ namespace SistemaElectoral.Datos.Rol
             string sql = "";
             sql += "select id, nombre, estado ";
             sql += "from rol ";
+            sql += "where estado='Activo'";
             sql += "order by id asc";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             List<RolModel> lista = DataTableToList(dt);
