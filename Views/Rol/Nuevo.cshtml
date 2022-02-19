@@ -1,0 +1,19 @@
+﻿@model RolModel
+
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<h2 class="text-light text-center mb-4">CREAR NUEVO ROL</h2>
+
+<form id="nuevo" asp-action="Guardar" method="post">
+    <div class="form-group" id="input-100">
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="nombre" type="text" class="form-control"/>
+    </div>
+    
+     <div class="form-group" id="botones">
+        <button class="btn btn-light">Agregar</button>
+    </div>
+
+</form>

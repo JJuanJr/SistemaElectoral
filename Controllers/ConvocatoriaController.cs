@@ -60,6 +60,8 @@ namespace SistemaElectoral.Controllers
         public IActionResult Modificar(int id)
         {
             Convocatoria modelo = datos.Consultar(id);
+            ViewData["Cargo"] = CargoData.Consultar();
+            ViewData["Eleccion"] = EleccionData.Consultar();
             return View(modelo);
         }
 

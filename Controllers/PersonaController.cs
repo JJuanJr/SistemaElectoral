@@ -24,7 +24,6 @@ namespace SistemaElectoral.Controllers
             ViewData["Rol"] = lista;
             return View();
         }
-        
         public IActionResult Guardar(PersonaModel modelo)
         {
             PersonaData.Guardar(modelo);

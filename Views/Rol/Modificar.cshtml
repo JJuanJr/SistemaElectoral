@@ -1,0 +1,27 @@
+﻿@model RolModel
+
+@{
+    ViewData["Title"] = "Modificar";
+}
+
+<h2 class="text-light text-center">ROL</h2>
+
+<form asp-action="Actualizar" method="post" id="modificar">
+    @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m => m.estado)
+
+    <div class="form-group mb-3">
+        <label class="text-light">NOMBRE</label>
+        @Html.EditorFor(m => m.nombre, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div class="form-group mb-3 text-center">
+        <button class="btn btn-light" type="submit">Guardar</button>
+    </div>
+</form>
+
+<div class="text-lg-end">
+    <a asp-action="Index" class="text-light">VOLVER</a>
+</div>
+
+

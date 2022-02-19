@@ -49,30 +49,13 @@ namespace SistemaElectoral.Datos
             }
         }
 
-        public static DataTable EjecutarConsulta(string sentencia, List<MySqlParameter> ListaParametros, CommandType TipoComando)
-        {
-            MySqlDataAdapter adaptador = new MySqlDataAdapter();
-            adaptador.SelectCommand = new MySqlCommand(sentencia, conexion);
-            adaptador.SelectCommand.CommandType = TipoComando;
-
-            foreach (MySqlParameter parametro in ListaParametros)
-            {
-                adaptador.SelectCommand.Parameters.Add(parametro);
-            }
-            DataSet resultado = new DataSet();
-            adaptador.Fill(resultado);
-
-            return resultado.Tables[0];
-        }
-
-
-        public static string cad_Conexion()
+        private static string cad_Conexion()
         {
             return "Server=Localhost;Database=elecciones;Uid=root;Pwd=root;";
 
         }
 
-        public static MySqlConnection ConectarMysql() //Metoto para conectar a C# a MySQL
+        private static MySqlConnection ConectarMysql() //Metoto para conectar a C# a MySQL
         {
             string CadenaConexion;
             CadenaConexion = cad_Conexion();

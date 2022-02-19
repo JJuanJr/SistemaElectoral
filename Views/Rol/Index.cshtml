@@ -6,7 +6,7 @@
 
 <h2 class="text-light text-center">LISTA DE ROLES</h2>
 
-<a asp-action="Nuevo" class="text-light">CREAR NUEVA CONVOCATORIA</a> 
+<a asp-action="Nuevo" class="text-light">CREAR NUEVO ROL</a> 
 
 <div id="scroll-table" class="table-responsive">
     <table class="table text-light table-bordered">
@@ -25,9 +25,8 @@
                     @item.nombre
                 </td>
                 <td class="text-center">
-                    <a @*asp-action="Modificar" asp-route-id="@item.id"*@ class="text-light">MODIFICAR</a> |
-                    <a @*asp-action="Detalle" asp-route-id="@item.id"*@ class="text-light">VER</a> |
-                    <a @*asp-action="Eliminar" asp-route-id="@item.id"*@ class="text-light">ELIMINAR</a> 
+                    <a asp-action="Modificar" asp-route-id="@item.id" class="text-light">MODIFICAR</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.id" class="text-light">ELIMINAR</a> 
                 </td>
             </tr>
         }

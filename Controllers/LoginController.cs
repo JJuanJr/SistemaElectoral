@@ -10,7 +10,7 @@ namespace SistemaElectoral.Controllers
         
         public ActionResult Index()
         {
-            ViewBag.Invalido = "";
+            ViewBag.Invalido = false;
             return View();
         }
 
@@ -21,7 +21,7 @@ namespace SistemaElectoral.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.Invalido = "¡Usuario no encontrado!";
+            ViewBag.Invalido = true;
             return View("Index");
         }
 
