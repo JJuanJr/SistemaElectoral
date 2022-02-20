@@ -24,7 +24,7 @@
         <img class="profile-img-card" src="~/css/imagenes/login/candado.png">
         <form asp-action="Validar" class="form-signin">
             <div class="form-group">
-                <input asp-for="user" class="form-control" type="text" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Usuario" value="">
+                <input asp-for="user" class="form-control" type="number" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Usuario" value="">
                 <input asp-for="password" class="form-control" type="password" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Contraseña" value="">
                 <div class="checkbox">
                     <div class="form-check">
@@ -32,7 +32,10 @@
                         <label class="form-check-label" for="formCheck-1">Recuerdame</label>
                     </div>
                 </div>
-                <a class="text-danger fw-bold">@ViewBag.Invalido</a>
+                @if(ViewBag.Invalido == true)
+                {
+                    <a class="text-danger fw-bold">¡Usuario no encontrado!</a>
+                }
                 <button class="btn btn-primary btn-lg d-block btn-signin w-100" type="submit">Ingresar</button>
             </div>
         </form>

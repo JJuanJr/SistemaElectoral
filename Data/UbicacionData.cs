@@ -12,14 +12,13 @@ namespace SistemaElectoral.Data
             modelo.id = row.Field<uint>("id");
             modelo.direccion = row.Field<string>("direccion");
             modelo.fk_id_municipo = row.Field<uint>("fk_id_municipio");
-            modelo.fk_id_departamento = row.Field<uint>("fk_id_departamento");
             return modelo;
         }
 
         public static UbicacionModel Consultar(uint id)
         {
             string sql = "";
-            sql += "select id, direccion, fk_id_municipio, fk_id_departamento ";
+            sql += "select id, direccion, fk_id_municipio ";
             sql += "from ubicacion ";
             sql += "where id=" + id;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);

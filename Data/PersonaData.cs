@@ -55,7 +55,7 @@ namespace SistemaElectoral.Datos.Persona
             return lista;
         }
 
-        public static PersonaModel ConsultarPersona(int id)
+        public static PersonaModel Consultar(ulong id)
         {
             string sql = "";
             sql += "select id, nombre, apellido, edad, genero, fk_id_rol ";

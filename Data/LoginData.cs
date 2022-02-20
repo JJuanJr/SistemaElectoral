@@ -5,10 +5,10 @@
     using SistemaElectoral.Datos;
     public class LoginData
     {
-        public static bool Validar(string user, string password)
+        public static bool Validar(ulong user, string password)
         {
-            string sql = "select usuario, contraseña from persona ";
-            sql += "where usuario = '" + user + "' and ";
+            string sql = "select id, contraseña from persona ";
+            sql += "where id = " + user + " and ";
             sql += "contraseña = '" + password + "'";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             if (dt.Rows.Count > 0)

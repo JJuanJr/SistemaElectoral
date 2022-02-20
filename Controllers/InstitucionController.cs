@@ -8,9 +8,12 @@ namespace SistemaElectoral.Controllers
     {
         public IActionResult Index()
         {
-            InstitucionModel modelo = InstitucionData.Consultar();
-            ViewData["Ubicacion"] = UbicacionData.Consultar(modelo.fk_id_ubicacion);
-            return View(modelo);
+            InstitucionModel institucion = InstitucionData.Consultar();
+            UbicacionModel ubicacion = UbicacionData.Consultar(institucion.fk_id_ubicacion);
+            MunicipioModel municipio = MunicipioData.Consultar(ubicacion.fk_id_municipo);
+            ViewData["Ubicacion"] = ubicacion;
+            ViewData["Municipio"] = municipio;
+            return View(institucion);
         }
 
         public IActionResult Modificar()

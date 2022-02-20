@@ -38,17 +38,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Institucion" asp-action="Index">Institucion</a>
                         </li>
-                        @*<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Usuarios
+                    </ul>
+                    <ul class="navbar-nav float-right">
+                        <li class="nav-item dropstart">
+                            <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sesión
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item text-dark" asp-controller="Persona" asp-action="Index">Listar Usuarios</a></li>
-                                <li><a class="dropdown-item text-dark" href="#">Crear Usuario</a></li>
-                                <li><a class="dropdown-item text-dark" href="#">Eliminar Usuario</a></li>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item text-dark">Perfil</a></li>
+                                <li><a asp-action="CerrarSesion" asp-controller="Login" class="dropdown-item text-dark">Cerrar sesion</a></li>
                             </ul>
-                        </li>*@
-                        
+                        </li>
                     </ul>
                 </div>
 

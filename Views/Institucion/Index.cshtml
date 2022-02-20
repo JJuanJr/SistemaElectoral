@@ -49,14 +49,14 @@
             MUNICIPIO
         </dt>
         <dd>
-            @(MunicipioData.ObtenerNombreMunicipio((ViewData["Ubicacion"] as UbicacionModel).fk_id_municipo))
+            @((ViewData["Municipio"] as MunicipioModel).nombre)
         </dd>
 
         <dt>
             DEPARTAMENTO
         </dt>
         <dd>
-            @(DepartamentoData.ObtenerNombreDepartamento((ViewData["Ubicacion"] as UbicacionModel).fk_id_departamento))
+            @(DepartamentoData.ObtenerNombreDepartamento((ViewData["Municipio"] as MunicipioModel).fk_id_departamento))
         </dd>
     </dl>
 </div>

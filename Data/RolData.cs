@@ -1,4 +1,5 @@
-﻿using SistemaElectoral.Models;
+﻿using Newtonsoft.Json;
+using SistemaElectoral.Models;
 using System.Data;
 
 namespace SistemaElectoral.Datos.Rol
@@ -72,6 +73,37 @@ namespace SistemaElectoral.Datos.Rol
             sql += "set nombre='" + modelo.nombre + "' ";
             sql += "where id=" + modelo.id;
             Conexion.EjecutarOperacion(sql);
+        }
+
+        public static bool TienePermiso(Object tempdata, string nombre)
+        {
+            if (tempdata == null)
+            {
+                return false;
+            }
+            PersonaModel modelo = JsonConvert.DeserializeObject<PersonaModel>(tempdata.ToString());
+
+            string sql = "";
+            sql += "select persona.id, permiso.descripcion ";
+            sql += "from persona ";
+            sql += "inner join rol ";
+            sql += "on persona.fk_id_rol=rol.id ";
+            sql += "inner join permiso_rol ";
+            sql += "on permiso_rol.id_rol=rol.id ";
+            sql += "inner join permiso ";
+            sql += "on permiso_rol.id_permiso=permiso.id ";
+            sql += "where permiso_rol.id_rol=" + modelo.fk_id_rol + " ";
+            sql += "and permiso_rol.estado='Activo' ";
+            sql += "and permiso.descripcion='" + nombre + "' ";
+            sql += "and persona.id=" + modelo.id;
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
+            if (dt.Rows.Count > 0)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }
