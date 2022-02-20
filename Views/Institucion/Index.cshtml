@@ -1,8 +1,66 @@
-﻿
+﻿@using SistemaElectoral.Data
+@model InstitucionModel
+
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2 class="text-light text-center">INFORMACION</h2>
 
-<input class="form-control-file text-light" type="file" accept="image/png"/>
+<div>
+    <dl class="text-light">
+        <dt>
+            NOMBRE
+        </dt>
+        <dd>
+            @Model.nombre
+        </dd>
+        
+        <dt>
+            REGISTRO
+        </dt>
+        <dd>
+            @Model.registro
+        </dd>
+
+        <dt>
+            TELEFONO
+        </dt>
+        <dd>
+            @Model.telefono
+        </dd>
+
+        <dt>
+            NOMBRE DEL RECTOR
+        </dt>
+        <dd>
+            @Model.nombre_rector
+        </dd>
+
+        <dt>
+            DIRECCION
+        </dt>
+        <dd>
+            @((ViewData["Ubicacion"] as UbicacionModel).direccion.ToString())
+        </dd>
+
+        <dt>
+            MUNICIPIO
+        </dt>
+        <dd>
+            @(MunicipioData.ObtenerNombreMunicipio((ViewData["Ubicacion"] as UbicacionModel).fk_id_municipo))
+        </dd>
+
+        <dt>
+            DEPARTAMENTO
+        </dt>
+        <dd>
+            @(DepartamentoData.ObtenerNombreDepartamento((ViewData["Ubicacion"] as UbicacionModel).fk_id_departamento))
+        </dd>
+    </dl>
+</div>
+
+<a asp-action="Modificar" class="text-light">Modificar</a>
+
+

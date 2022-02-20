@@ -1,0 +1,41 @@
+﻿@model InstitucionModel
+
+@{
+    ViewData["Title"] = "Modificar";
+}
+
+<h2 class="text-light text-center">MODIFICAR INSTITUCION</h2>
+
+<form asp-action="Actualizar" method="post" class="text-light">
+
+    @Html.HiddenFor(m => m.fk_id_ubicacion)
+
+    <div>
+        <label>NOMBRE</label>
+        @Html.EditorFor(m => m.nombre)
+    </div>
+
+    <div>
+        <label>REGISTRO</label>
+        @Html.EditorFor(m => m.registro)
+    </div>
+
+    <div>
+        <label>NOMBRE DEL RECTOR</label>
+        @Html.EditorFor(m => m.nombre_rector)
+    </div>
+
+    <div>
+        <label>TElEFONO</label>
+        @Html.EditorFor(m => m.telefono)
+    </div>
+
+    <div>
+        <input asp-for="@("FileUpload.FormFiles")" class="form-control-file text-light" type="file" accept="image/png"/>
+    </div>
+
+    <div class="mb-3 text-center">
+        <button class="btn btn-light" type="submit">Modificar</button>
+    </div>
+</form>
+

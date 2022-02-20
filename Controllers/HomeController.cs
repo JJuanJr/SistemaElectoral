@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaElectoral.Data;
 
 namespace SistemaElectoral.Controllers
 {
@@ -6,11 +7,7 @@ namespace SistemaElectoral.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            ViewData["NombreInstitucion"] = InstitucionData.Consultar().nombre; 
             return View();
         }
     }
