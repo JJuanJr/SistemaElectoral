@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaElectoral.Data;
+using SistemaElectoral.Datos.Rol;
 using SistemaElectoral.Models;
 
 namespace SistemaElectoral.Controllers
@@ -18,6 +19,18 @@ namespace SistemaElectoral.Controllers
 
         public IActionResult Modificar()
         {
+            const string nombre_page = "Institucion_Modificar01";
+            // Permiso
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             InstitucionModel modelo = InstitucionData.Consultar();
             return View(modelo);
         }
@@ -25,6 +38,20 @@ namespace SistemaElectoral.Controllers
         [HttpPost]
         public IActionResult Actualizar(InstitucionModel nuevo)
         {
+            const string nombre_page = "Institucion_Actualizar01";
+            // Permiso
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+
             InstitucionData.Actualizar(nuevo);
 
             InstitucionModel modelo = InstitucionData.Consultar();

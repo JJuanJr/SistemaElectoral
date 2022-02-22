@@ -11,14 +11,16 @@ namespace SistemaElectoral.Controllers
     {
         public IActionResult Index()
         {
-            string nombre_page = "Home_Index01";
+            const string nombre_page = "Home_Index01";
             // Permiso
-            if (!RolData.TienePermiso(TempData["Sesion"], nombre_page))
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
             {
                 return RedirectToAction("Index", "Login");
+            } else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
             }
-            TempData.Keep("Sesion");
-
 
             ViewData["NombreInstitucion"] = InstitucionData.Consultar().nombre; 
             return View();

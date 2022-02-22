@@ -25,6 +25,7 @@
         <form asp-action="Validar" class="form-signin">
             <div class="form-group">
                 <input asp-for="user" class="form-control" type="number" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Usuario" value="">
+
                 <input asp-for="password" class="form-control" type="password" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Contraseña" value="">
                 <div class="checkbox">
                     <div class="form-check">

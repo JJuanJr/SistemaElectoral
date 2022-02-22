@@ -1,0 +1,48 @@
+﻿@model PersonaModel
+@{
+    ViewData["Title"] = "Detalle";
+}
+
+<h2 class="text-light text-center">PERFIL</h2>
+
+<>
+    <dl class="text-light">
+        <dt class="form-group">
+            ID
+        </dt>
+        <dd class="form-group">
+            @Model.id
+        </dd>
+           
+         <dt class="form-group">
+            NOMBRE
+        </dt>
+        <dd class="form-group">
+            @Model.nombre 
+        </dd>
+        
+        <dt class="form-group">
+            APELLIDO
+        </dt>
+        <dd class="form-group">
+            @Model.apellido
+        </dd>
+        
+        <dt class="form-group">
+            EDAD
+        </dt>
+        <dd class="form-group">
+            @Model.edad
+        </dd>
+
+         <dt class="form-group">
+            GENERO
+        </dt>
+        <dd class="form-group">
+            @Model.genero
+        </dd>
+    </dl>
+
+    <a asp-action="Index" asp-controller="Home" class="text-light">VOLVER</a> 
+ 
+</div>

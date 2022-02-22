@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -32,6 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Rol" asp-action="Index">Roles</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Permisos</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Votaciones</a>
                         </li>
@@ -45,7 +49,7 @@
                                 Sesión
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-dark">Perfil</a></li>
+                                <li><a asp-action="Detalle" asp-controller="Persona" asp-route-id="@(JsonConvert.DeserializeObject<PersonaModel>(TempData.Peek("Sesion").ToString()).id)" class="dropdown-item text-dark">Perfil</a></li>
                                 <li><a asp-action="CerrarSesion" asp-controller="Login" class="dropdown-item text-dark">Cerrar sesion</a></li>
                             </ul>
                         </li>
@@ -55,6 +59,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -66,6 +71,7 @@
             &copy; 2022 - SistemaElectoral
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

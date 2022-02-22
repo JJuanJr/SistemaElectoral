@@ -44,6 +44,18 @@ namespace SistemaElectoral.Datos.Persona
             Conexion.EjecutarOperacion(sql);
         }
 
+        public static void Actualizar(PersonaModel modelo)
+        {
+            string sql = "";
+            sql += "update persona set";
+            sql += "nombre='" + modelo.nombre + "', ";
+            sql += "apellido='" + modelo.apellido + "', ";
+            sql += "edad=" + modelo.edad + ", ";
+            sql += "fk_id_rol=" + modelo.fk_id_rol + " ";
+            sql += "where id=" + modelo.id;
+            Conexion.EjecutarOperacion(sql);
+        }
+
         public static List<PersonaModel> Consultar()
         {
             string sql = "";

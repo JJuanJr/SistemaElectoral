@@ -8,23 +8,24 @@
     background-color: #1e2833;
     margin: 0 auto 25px;
     margin-top: 100px;
-    border-radius: 2px;
+    border-radius: 5px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.login-card .profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 15px;
-    display: block;
-    /*border-radius: 0%;*/
-}
+    .login-card .profile-img-card {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 15px;
+        display: block;
+        margin-bottom: 20px;
+        /*border-radius: 0%;*/
+    }
 
 .login-card .reauth-email {
     display: block;
     color: #404040;
     line-height: 2;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 14px;
     text-align: center;
     overflow: hidden;
@@ -33,36 +34,38 @@
     box-sizing: border-box;
 }
 
-.login-card .form-signin input[type=email], .login-card .form-signin input[type=password], .login-card .form-signin input[type=text], .login-card .form-signin button {
-    height: 44px;
-    font-size: 16px;
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    z-index: 1;
-    position: relative;
-    box-sizing: border-box;
-}
+    .login-card .form-signin input[type=email], .login-card .form-signin input[type=password], .login-card .form-signin input[type=text], .login-card .form-signin button {
+        /*height: 44px;*/
+        font-size: 16px;
+        width: 100%;
+        display: block;
+        margin-bottom: 15px;
+        z-index: 1;
+        position: relative;
+        box-sizing: border-box;
+    }
 
-.login-card label {
-    color: #000000;
-}
+    .login-card label {
+        color: #000000;
+    }
 
-.login-card .form-control {
-    background: transparent;
-    color: white;
-}
+    .login-card .form-control {
+        /*background: transparent;*/
+        color: black;
+        margin-bottom: 15px;
+    }
 
-.login-card .form-check-label {
-    color: white;
-}
+    .login-card .form-check-label {
+        color: white;
+        margin-bottom: 15px;
+    }
 
-.login-card .form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-}
+    .login-card .form-signin .form-control:focus {
+        border-color: rgb(104, 145, 162);
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    }
 
 .login-card .btn.btn-signin {
     font-weight: 700;
@@ -78,4 +81,15 @@
 
 .login-card .forgot-password {
     color: white;
+    margin-bottom: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

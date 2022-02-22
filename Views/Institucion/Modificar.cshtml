@@ -9,6 +9,8 @@
 <form asp-action="Actualizar" method="post" class="text-light">
 
     @Html.HiddenFor(m => m.fk_id_ubicacion)
+    @Html.HiddenFor(m => m.logo)
+    @Html.HiddenFor(m => m.fk_id_ubicacion)
 
     <div>
         <label>NOMBRE</label>
@@ -30,9 +32,9 @@
         @Html.EditorFor(m => m.telefono)
     </div>
 
-    <div>
+    @*<div>
         <input asp-for="@("FileUpload.FormFiles")" class="form-control-file text-light" type="file" accept="image/png"/>
-    </div>
+    </div>*@
 
     <div class="mb-3 text-center">
         <button class="btn btn-light" type="submit">Modificar</button>

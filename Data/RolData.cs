@@ -75,11 +75,11 @@ namespace SistemaElectoral.Datos.Rol
             Conexion.EjecutarOperacion(sql);
         }
 
-        public static bool TienePermiso(Object tempdata, string nombre)
+        public static int TienePermiso(Object tempdata, string nombre)
         {
             if (tempdata == null)
             {
-                return false;
+                return -1;
             }
             PersonaModel modelo = JsonConvert.DeserializeObject<PersonaModel>(tempdata.ToString());
 
@@ -99,11 +99,9 @@ namespace SistemaElectoral.Datos.Rol
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             if (dt.Rows.Count > 0)
             {
-                return true;
-            } else
-            {
-                return false;
+                return 1;
             }
+            return 0;
         }
     }
 }
