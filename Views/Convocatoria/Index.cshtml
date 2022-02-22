@@ -1,4 +1,5 @@
-﻿@model List<SistemaElectoral.Models.Convocatoria>
+﻿@using SistemaElectoral.Datos.Rol
+@model List<SistemaElectoral.Models.Convocatoria>
 
 @{
     ViewBag.Title = "Convocatoria";
@@ -6,10 +7,12 @@
 
 <h2 class="text-light text-center">LISTA DE CONVOCATORIAS</h2>
 
-<p>
-    <a asp-action="Nuevo" class="text-light">CREAR NUEVA CONVOCATORIA</a> 
-    @*@Html.ActionLink("CREAR NUEVA CONVOCATORIA", "Nuevo", "Convocatoria", null, new { @class="text-light" })*@
-</p>
+@if(RolData.TienePermiso(TempData.Peek("Sesion"), "Convocatoria_Nuevo01") == 1)
+{
+    <p>
+        <a asp-action="Nuevo" class="text-light">CREAR NUEVA CONVOCATORIA</a> 
+    </p>
+}
 
 <div id="scroll-table" class="table-responsive">
     <table class="table text-light table-bordered">
@@ -36,9 +39,18 @@
                     @item.fecha_fin
                 </td>
                 <td class="text-center">
-                    <a asp-action="Modificar" asp-route-id="@item.id" class="text-light">MODIFICAR</a> |
-                    <a asp-action="Detalle" asp-route-id="@item.id" class="text-light">VER</a> |
-                    <a asp-action="Eliminar" asp-route-id="@item.id" class="text-light">ELIMINAR</a> 
+                    @if(RolData.TienePermiso(TempData.Peek("Sesion"), "Convocatoria_Modificar01") == 1)
+                    {
+                        <a asp-action="Modificar" asp-route-id="@item.id" class="text-light">MODIFICAR</a>
+                    }
+                    @if(RolData.TienePermiso(TempData.Peek("Sesion"), "Convocatoria_Detalle01") == 1)
+                    {
+                        <a asp-action="Detalle" asp-route-id="@item.id" class="text-light">VER</a>
+                    }
+                    @if(RolData.TienePermiso(TempData.Peek("Sesion"), "Convocatoria_Eliminar01") == 1)
+                    {
+                        <a asp-action="Eliminar" asp-route-id="@item.id" class="text-light">ELIMINAR</a> 
+                    }
                     @*@Html.ActionLink("MODIFICAR", "Modificar", new {id=item.id }, new { @class="text-light" }) |*@
                     @*@Html.ActionLink(" VER ", "Detalle", new { id=item.id }, new { @class="text-light" }) |*@
                     @*@Html.ActionLink(" ELIMINAR ", "Eliminar", new { id=item.id }, new { @class="text-light" })*@

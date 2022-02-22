@@ -23,7 +23,8 @@ namespace SistemaElectoral.Controllers
             if (valor_permiso == -1)
             {
                 return RedirectToAction("Index", "Login");
-            } else if (valor_permiso == 0)
+            }
+            else if (valor_permiso == 0)
             {
                 return RedirectToAction("Index", "Home");
             }
