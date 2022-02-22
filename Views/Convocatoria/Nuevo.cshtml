@@ -1,4 +1,4 @@
-﻿@using System.Data
+﻿    @using System.Data
 @model SistemaElectoral.Models.Convocatoria
 
 @{
@@ -8,8 +8,6 @@
 <h2 class="text-light text-center mb-4">CREAR NUEVA CONVOCATORIA</h2>
 
 <form id="nuevo" asp-action="Guardar" method="post">
-
-    @*<div class="col-sm-12 col-md-12 col-lg-12">*@
 
         <div class="form-group" id="input-100">
             <label class="text-light">NOMBRE</label>
@@ -45,20 +43,25 @@
                     <option value="@row[0].ToString()">@row[1].ToString()</option>
                 }
             </select>*@
-            <dd class="form-group form-control">
+            <div class="form-group">
+                @Html.EditorFor(m => m.nombre, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group" id="botones">
+            <button class="btn btn-light">Agregar</button>
+        </div>
+
+        <dd class="form-group form-control">
             + <br />
             + <br />
             +
-        </dd>
-        </div>
+         </dd>
 
-        <div class="form-group" id="botones-centro">
-            <button class="btn btn-light">Agregar</button>
-        </div>
         <div class="form-group text-center" id="botones-centro">
             <button class="btn btn-light" type="submit">CREAR</button>
         </div>
-    @*</div>*@
+    
 </form>
 
 
