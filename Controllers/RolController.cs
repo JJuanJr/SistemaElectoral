@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using SistemaElectoral.Data;
 using SistemaElectoral.Datos.Rol;
 using SistemaElectoral.Models;
+using System.Collections.Generic;
 
 namespace SistemaElectoral.Controllers
 {
@@ -58,9 +62,12 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            RolModel modelo = new RolModel();
+            modelo.permisos = PermisoData.ListToSelectList();
+            return View(modelo);
         }
 
+        [HttpPost]
         public IActionResult Guardar(RolModel modelo)
         {
             const string nombre_page = "Rol_Guardar01";
@@ -75,8 +82,8 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
             RolData.Guardar(modelo);
+
             List<RolModel> lista = RolData.Consultar();
             return View("Index", lista);
         }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SistemaElectoral.Data;
 using SistemaElectoral.Models;
 using System.Data;
 
@@ -13,6 +14,7 @@ namespace SistemaElectoral.Datos.Rol
             modelo.id = row.Field<uint>("id");
             modelo.nombre = row.Field<string>("nombre");
             modelo.estado = row.Field<string>("estado");
+            modelo.permisos = PermisoData.ListToSelectList(modelo.id);
             return modelo;
         }
         public static List<RolModel> DataTableToList(DataTable dt)
@@ -57,6 +59,7 @@ namespace SistemaElectoral.Datos.Rol
             return modelo;
         }
 
+
         public static void Guardar(RolModel modelo)
         {
             string sql = "";
@@ -64,6 +67,24 @@ namespace SistemaElectoral.Datos.Rol
             sql += "('" + modelo.nombre + "', ";
             sql += "'Activo')";
             Conexion.EjecutarOperacion(sql);
+
+            sql = "select id ";
+            sql += "from rol ";
+            sql += "where nombre = '" + modelo.nombre + "'";
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
+            modelo.id = dt.Rows[0].Field<uint>("id");
+
+            foreach (var item in modelo.permisos)
+            {
+                if (item.Selected)
+                {
+                    sql = "insert into permiso_rol(id_permiso, id_rol, estado) values";
+                    sql += "(" + item.Value + ", ";
+                    sql += modelo.id + ", ";
+                    sql += "'Activo')";
+                    Conexion.EjecutarOperacion(sql);
+                }
+            }
         }
 
         public static void Actualizar(RolModel modelo)
