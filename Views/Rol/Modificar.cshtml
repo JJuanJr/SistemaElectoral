@@ -15,6 +15,21 @@
         @Html.EditorFor(m => m.nombre, new { htmlAttributes = new { @class = "form-control" } })
     </div>
 
+    <div class="form-grup text-light">
+        <table>
+            @for(int i = 0; i < Model.permisos.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" asp-for="@Model.permisos[i].Value" />
+                        <input asp-for="@Model.permisos[i].Selected" />
+                        <label>@Model.permisos[i].Text</label>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
     <div class="form-group text-center" id="botones-centro">
         <button class="btn btn-light" type="submit">Guardar</button>
     </div>

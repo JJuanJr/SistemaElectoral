@@ -72,7 +72,7 @@ namespace SistemaElectoral.Data
             string sql = "";
             sql += "select id_permiso, id_rol, estado ";
             sql += "from permiso_rol ";
-            sql += "where estado = 'Activo' ";
+            sql += "where permiso_rol.estado = 'Activo' ";
             sql += "and id_permiso = " + id_permiso + " ";
             sql += "and id_rol = " + id_rol;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);

@@ -31,9 +31,20 @@ namespace SistemaElectoral.Datos.Rol
         public static void Eliminar(int id)
         {
             string sql = "";
-            sql += "delete from rol ";
-            sql += "where id=" + id;
+            sql += "update rol set ";
+            sql += "rol.estado = 'Inactivo' ";
+            sql += "where rol.id =" + id;
             Conexion.EjecutarOperacion(sql);
+
+            RolModel modelo = Consultar(id);
+            foreach (var item in modelo.permisos)
+            {
+                sql = "replace into permiso_rol(id_permiso, id_rol, estado) values";
+                sql += "(" + item.Value + ", ";
+                sql += modelo.id + ", ";
+                sql += "'Inactivo')";
+                Conexion.EjecutarOperacion(sql);
+            }
         }
 
         public static List<RolModel> Consultar()
@@ -41,7 +52,7 @@ namespace SistemaElectoral.Datos.Rol
             string sql = "";
             sql += "select id, nombre, estado ";
             sql += "from rol ";
-            sql += "where estado='Activo'";
+            sql += "where estado = 'Activo'";
             sql += "order by id asc";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             List<RolModel> lista = DataTableToList(dt);
@@ -53,7 +64,7 @@ namespace SistemaElectoral.Datos.Rol
             string sql = "";
             sql += "select id, nombre, estado ";
             sql += "from rol ";
-            sql += "where id=" + id;
+            sql += "where id =" + id;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             RolModel modelo = DataRowToRol(dt.Rows[0]);
             return modelo;
@@ -94,6 +105,15 @@ namespace SistemaElectoral.Datos.Rol
             sql += "set nombre='" + modelo.nombre + "' ";
             sql += "where id=" + modelo.id;
             Conexion.EjecutarOperacion(sql);
+
+            foreach (var item in modelo.permisos)
+            {
+                sql = "replace into permiso_rol(id_permiso, id_rol, estado) values";
+                sql += "(" + item.Value + ", ";
+                sql += modelo.id + ", ";
+                sql += "'" + (item.Selected ? "Activo" : "Inactivo") + "')";
+                Conexion.EjecutarOperacion(sql);
+            }
         }
 
         public static int TienePermiso(Object tempdata, string nombre)
