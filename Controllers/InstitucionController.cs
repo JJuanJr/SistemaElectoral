@@ -50,12 +50,19 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\css\\imagenes\\home\\inicio.png");
+            using var stream = new FileStream(path, FileMode.Create);
+            nuevo.imagen.CopyTo(stream);
 
 
             InstitucionData.Actualizar(nuevo);
 
             InstitucionModel modelo = InstitucionData.Consultar();
-            ViewData["Ubicacion"] = UbicacionData.Consultar(modelo.fk_id_ubicacion);
+            UbicacionModel ubicacion = UbicacionData.Consultar(modelo.fk_id_ubicacion);
+            MunicipioModel municipio = MunicipioData.Consultar(ubicacion.fk_id_municipo);
+            ViewData["Ubicacion"] = ubicacion;
+            ViewData["Municipio"] = municipio;
+
             return View("Index", modelo);
         }
     }

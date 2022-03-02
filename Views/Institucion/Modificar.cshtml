@@ -6,7 +6,7 @@
 
 <h2 class="text-light text-center">MODIFICAR INSTITUCION</h2>
 
-<form asp-action="Actualizar" method="post" class="text-light">
+<form asp-action="Actualizar" method="post" enctype="multipart/form-data" class="text-light">
 
     @Html.HiddenFor(m => m.fk_id_ubicacion)
     @Html.HiddenFor(m => m.logo)
@@ -32,9 +32,10 @@
         @Html.EditorFor(m => m.telefono)
     </div>
 
-    @*<div>
-        <input asp-for="@("FileUpload.FormFiles")" class="form-control-file text-light" type="file" accept="image/png"/>
-    </div>*@
+    <div>
+        <label>LOGO</label>
+        <input asp-for="imagen" type="file" accept="image/png"/>
+    </div>
 
     <div class="mb-3 text-center">
         <button class="btn btn-light" type="submit">Modificar</button>
