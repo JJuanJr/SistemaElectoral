@@ -44,8 +44,10 @@ namespace SistemaElectoral.Controllers
             }
 
             PersonaModel modelo = PersonaData.Consultar(id);
+
             return View(modelo);
         }
+
         public IActionResult Nuevo()
         {
             const string nombre_page = "Persona_Nuevo01";

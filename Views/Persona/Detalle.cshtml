@@ -5,7 +5,11 @@
 
 <h2 class="text-light text-center">PERFIL</h2>
 
-<>
+<div>
+    <div>
+        @*quitar width y height, agregarlos a css*@
+        <img width="200" height="200" src="~/css/imagenes/@Model.foto" alt=""/>
+    </div>
     <dl class="text-light">
         <dt class="form-group">
             ID
@@ -13,8 +17,9 @@
         <dd class="form-group">
             @Model.id
         </dd>
-           
-         <dt class="form-group">
+        
+
+        <dt class="form-group">
             NOMBRE
         </dt>
         <dd class="form-group">

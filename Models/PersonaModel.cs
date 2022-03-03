@@ -7,6 +7,8 @@
         public string apellido { get; set; }
         public uint edad { get; set; }
         public string genero { get; set; }
+        public string foto { get; set; }
+        public IFormFile foto_file { get; set; }
         public string usuario { get; set; }
         public string contraseña { get; set; }
         public uint fk_id_rol { get; set; }

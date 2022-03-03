@@ -14,6 +14,7 @@ namespace SistemaElectoral.Datos.Persona
             modelo.apellido = row.Field<string>("apellido");
             modelo.edad = row.Field<uint>("edad");
             modelo.genero = row.Field<string>("genero");
+            modelo.foto = row.Field<string>("foto");
             modelo.fk_id_rol = row.Field<uint>("fk_id_rol");
             return modelo;
         }
@@ -59,7 +60,7 @@ namespace SistemaElectoral.Datos.Persona
         public static List<PersonaModel> Consultar()
         {
             string sql = "";
-            sql += "select id, nombre, apellido, edad, genero, fk_id_rol ";
+            sql += "select id, nombre, apellido, edad, genero, foto, fk_id_rol ";
             sql += "from persona ";
             sql += "order by id";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
@@ -70,7 +71,7 @@ namespace SistemaElectoral.Datos.Persona
         public static PersonaModel Consultar(ulong id)
         {
             string sql = "";
-            sql += "select id, nombre, apellido, edad, genero, fk_id_rol ";
+            sql += "select id, nombre, apellido, edad, genero, foto, fk_id_rol ";
             sql += "from persona ";
             sql += "where id=" + id;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);

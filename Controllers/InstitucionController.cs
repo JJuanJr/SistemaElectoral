@@ -50,11 +50,6 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\css\\imagenes\\home\\inicio.png");
-            using var stream = new FileStream(path, FileMode.Create);
-            nuevo.imagen.CopyTo(stream);
-
-
             InstitucionData.Actualizar(nuevo);
 
             InstitucionModel modelo = InstitucionData.Consultar();
@@ -63,7 +58,8 @@ namespace SistemaElectoral.Controllers
             ViewData["Ubicacion"] = ubicacion;
             ViewData["Municipio"] = municipio;
 
-            return View("Index", modelo);
+            //return View("Index", modelo);
+            return RedirectToAction("Index");
         }
     }
 }

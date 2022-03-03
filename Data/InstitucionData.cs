@@ -30,11 +30,17 @@ namespace SistemaElectoral.Data
 
         public static void Actualizar(InstitucionModel modelo)
         {
+            if (modelo.imagen != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), modelo.logo);
+                using var stream = new FileStream(path, FileMode.Create);
+                modelo.imagen.CopyTo(stream);
+            }
+
             string sql = "";
             sql += "update institucion set ";
             sql += "nombre='" + modelo.nombre + "', ";
             sql += "registro='" + modelo.registro + "', ";
-            sql += "logo='" + modelo.logo + "', ";
             sql += "nombre_rector='" + modelo.nombre_rector + "', ";
             sql += "telefono='" + modelo.telefono + "', ";
             sql += "fk_id_ubicacion=" + modelo.fk_id_ubicacion;

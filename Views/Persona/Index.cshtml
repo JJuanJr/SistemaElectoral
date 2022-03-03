@@ -18,7 +18,7 @@
             <th>APELLIDO</th>
             <th>EDAD</th>
             <th>GENERO</th>
-            @*<th>OPCIONES</th>*@
+            <th>OPCIONES</th>
         </tr>
 
         @foreach(var item in Model) {
@@ -28,11 +28,11 @@
                 <td>@Html.DisplayFor(model => item.apellido)</td>
                 <td>@Html.DisplayFor(model => item.edad)</td>
                 <td>@Html.DisplayFor(model => item.genero)</td>
-                @*<td>
-                    @Html.ActionLink("Modificar", "Modificar", new { id=item.id }) |
-                    @Html.ActionLink("Ver", "Detalle", new { id=item.id }) |
-                    @Html.ActionLink("Eliminar", "Eliminar", new { id=item.id })
-                </td>*@
+                <td class="text-center">
+                    @*@Html.ActionLink("Modificar", "Modificar", new { id=item.id }) |*@
+                    <a asp-action="Detalle" asp-route-id="@item.id" class="text-light">VER</a>
+                    @*@Html.ActionLink("Eliminar", "Eliminar", new { id=item.id })*@
+                </td>
             </tr>
         }
     </table>
