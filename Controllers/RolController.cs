@@ -28,7 +28,7 @@ namespace SistemaElectoral.Controllers
             return View(lista);
         }
 
-        public IActionResult Eliminar(int id)
+        public IActionResult Eliminar(uint id)
         {
             const string nombre_page = "Rol_Eliminar01";
             // Permiso
@@ -88,7 +88,7 @@ namespace SistemaElectoral.Controllers
             return View("Index", lista);
         }
 
-        public IActionResult Modificar(int id)
+        public IActionResult Modificar(uint id)
         {
             const string nombre_page = "Rol_Modificar01";
             // Permiso

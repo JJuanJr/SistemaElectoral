@@ -27,11 +27,11 @@
                 <td>@Html.DisplayFor(model => item.nombre)</td>
                 <td>@Html.DisplayFor(model => item.apellido)</td>
                 <td>@Html.DisplayFor(model => item.edad)</td>
-                <td>@Html.DisplayFor(model => item.genero)</td>
+                <td>@(item.genero == "M" ? "Masculino" : "Femenino")</td>
                 <td class="text-center">
-                    @*@Html.ActionLink("Modificar", "Modificar", new { id=item.id }) |*@
-                    <a asp-action="Detalle" asp-route-id="@item.id" class="text-light">VER</a>
-                    @*@Html.ActionLink("Eliminar", "Eliminar", new { id=item.id })*@
+                    <a asp-action="Detalle" asp-route-id="@item.id" class="text-light">VER</a> |
+                    <a asp-action="Modificar" asp-route-id="@item.id" class="text-light">MODIFICAR</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.id" class="text-light" >ELIMINAR</a>
                 </td>
             </tr>
         }

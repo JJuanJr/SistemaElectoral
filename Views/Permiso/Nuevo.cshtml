@@ -1,0 +1,19 @@
+﻿@model PermisoModel
+
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<h1 class="text-center text-light">NUEVO PERMISO</h1>
+
+<form asp-action="Guardar" method="post">
+    <div class="form-gruop">
+        <label class="text-light">DESCRIPCION</label>
+        <input asp-for="descripcion" class="form-control"/>
+    </div>
+
+    <div class="form-group text-center" id="botones-centro">
+        <button class="btn btn-light" type="submit">Agregar</button>
+    </div>
+</form>
+

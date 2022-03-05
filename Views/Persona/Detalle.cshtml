@@ -44,10 +44,17 @@
             GENERO
         </dt>
         <dd class="form-group">
-            @Model.genero
+            @(Model.genero == "M" ? "Masculino" : "Femenino")
+        </dd>
+
+        <dt class="form-group">
+            ROL
+        </dt>
+        <dd class="form-group">
+            @((ViewData["Rol"] as RolModel).nombre)
         </dd>
     </dl>
 
-    <a asp-action="Index" asp-controller="Home" class="text-light">VOLVER</a> 
+    <a asp-action="Index" class="text-light">VOLVER</a> 
  
 </div>

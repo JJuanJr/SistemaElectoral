@@ -7,34 +7,26 @@
 
 <h2 class="text-light text-center mb-4">CREAR NUEVO USUARIO</h2>
 
-<form asp-action="Guardar" method="post" id="newuser">
+<form asp-action="Guardar" method="post" id="newuser" enctype="multipart/form-data">
 
     <div class="form-group" id="size-newU-50">
         <label class="text-light">NOMBRE</label>
-        <input asp-for="nombre" class="form-control" type="text" value="">
+        <input asp-for="nombre" class="form-control" type="text" value="" required>
     </div>
 
     <div class="form-group" id="size-newU-50">
         <label class="text-light">APELLIDO</label>
-        <input asp-for="apellido" class="form-control" type="text" value="">
-    </div>
-
-     <div class="form-group" id="size-newU-50">
-        <label class="text-light">TIPO IDENTIFICACIÓN</label>
-        <select asp-for="genero" class="form-control">
-            <option value="M">Masculino</option>
-            <option value="F">Femenino</option>
-        </select>
+        <input asp-for="apellido" class="form-control" type="text" value="" required>
     </div>
 
     <div class="form-group" id="size-newU-50">
         <label class="text-light">IDENTIFICACIÓN</label>
-        <input asp-for="id" class="form-control" type="number" value="">
+        <input asp-for="id" class="form-control" type="number" value="" required>
     </div>
 
     <div class="form-group" id="size-newU-20">
         <label class="text-light">EDAD</label>
-        <input asp-for="edad" class="form-control" type="number" value="">
+        <input asp-for="edad" class="form-control" type="number" value="" required>
     </div>
 
     <div class="form-group" id="size-newU-30" >
@@ -49,6 +41,12 @@
         <label class="text-light">ROL</label>
         <select asp-for="fk_id_rol" asp-items="@(new SelectList( (ViewData["Rol"] as List<RolModel>), "id", "nombre" ))" class="form-control"></select>
     </div>
+
+    <div class="form-group">
+        <label class="text-light">FOTO</label>
+        <input asp-for="foto_file" type="file" accept="image/png" class="form-control" required/>
+    </div>
+
     <div class="form-group text-center" id="botones-centro">
         <button class="btn btn-light" type="submit">Guardar</button>
     </div>

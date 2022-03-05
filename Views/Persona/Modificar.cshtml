@@ -1,0 +1,62 @@
+﻿@model PersonaModel
+
+@{
+    ViewData["Title"] = "Modificar";
+
+    List<RolModel> lista = ViewData["Rol"] as List<RolModel>;
+    List<SelectListItem> roles = lista.ConvertAll(m =>
+    {
+        return new SelectListItem()
+        {
+            Value = m.id.ToString(),
+            Text = m.nombre,
+            Selected = Model.fk_id_rol == m.id
+        };
+    });
+}
+
+<h1 class="text-center text-light">MODIFICAR PERSONA</h1>
+
+<form asp-action="Actualizar" method="post" enctype="multipart/form-data">
+    @Html.HiddenFor(m => m.id);
+    @Html.HiddenFor(m => m.foto);
+
+    <div class="form-group">
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="nombre" value="@Model.nombre" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+        <label class="text-light">APELLIDO</label>
+        <input asp-for="apellido" value="@Model.apellido" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+        <label class="text-light">EDAD</label>
+        <input asp-for="edad" type="number" value="@Model.edad" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+        <label class="text-light">GENERO</label>
+        <select asp-for="genero" class="form-control">
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="text-light">ROL</label>
+        <select asp-for="fk_id_rol" asp-items="@roles" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label class="text-light">FOTO</label>
+        <input asp-for="foto_file" type="file" accept="image/png" class="form-control"/>
+    </div>
+    
+    <div class="form-group">
+        <button class="btn btn-light" type="submit">Guardar</button>
+    </div>
+</form>
+
+<a asp-action="Index" class="text-light">VOLVER</a>

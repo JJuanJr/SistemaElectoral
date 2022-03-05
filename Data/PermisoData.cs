@@ -37,6 +37,17 @@ namespace SistemaElectoral.Data
             return DataTableToList(dt);
         }
 
+        public static PermisoModel Consultar(uint id)
+        {
+            string sql = "";
+            sql += "select id, descripcion, estado ";
+            sql += "from permiso ";
+            sql += "where estado = 'Activo' ";
+            sql += "and id = " + id;
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
+            return DataRowToPermiso(dt.Rows[0]);
+        }
+
         public static List<SelectListItem> ListToSelectList(uint id_rol)
         {
             List<PermisoModel> lista = Consultar();
@@ -81,6 +92,33 @@ namespace SistemaElectoral.Data
                 return true;
             }
             return false;
+        }
+
+        public static void Guardar(PermisoModel modelo)
+        {
+            string sql = "";
+            sql += "insert into permiso(descripcion, estado) values ";
+            sql += "('" + modelo.descripcion + "', ";
+            sql += "'Activo')";
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Eliminar(uint id)
+        {
+            string sql = "";
+            sql += "update permiso set ";
+            sql += "estado = 'Inactivo' ";
+            sql += "where id = " + id;
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Actualizar(PermisoModel modelo)
+        {
+            string sql = "";
+            sql += "update permiso set ";
+            sql += "descripcion = '" + modelo.descripcion + "' ";
+            sql += "where id = " + modelo.id;
+            Conexion.EjecutarOperacion(sql);
         }
     }
 }

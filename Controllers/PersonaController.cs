@@ -45,6 +45,7 @@ namespace SistemaElectoral.Controllers
 
             PersonaModel modelo = PersonaData.Consultar(id);
 
+            ViewData["Rol"] = RolData.Consultar(modelo.fk_id_rol);
             return View(modelo);
         }
 
@@ -81,9 +82,26 @@ namespace SistemaElectoral.Controllers
             }
 
             PersonaData.Guardar(modelo);
-            List<RolModel> lista = RolData.Consultar();
-            ViewData["Rol"] = lista;
-            return View("Nuevo");
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Eliminar(ulong id)
+        {
+            PersonaData.Eliminar(id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Modificar(ulong id)
+        {
+            PersonaModel modelo = PersonaData.Consultar(id);
+            ViewData["Rol"] = RolData.Consultar();
+            return View(modelo);
+        }
+
+        public IActionResult Actualizar(PersonaModel modelo)
+        {
+            PersonaData.Actualizar(modelo);
+            return RedirectToAction("Index");
         }
     }
 }

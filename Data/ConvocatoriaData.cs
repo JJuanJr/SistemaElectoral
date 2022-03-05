@@ -8,44 +8,64 @@ namespace SistemaElectoral.Datos.Convocatoria
 
     public class ConvocatoriaData
     {
+        private static Convocatoria DataRowToConvocatoria(DataRow row)
+        {
+            Convocatoria modelo = new Convocatoria();
+            modelo.id = row.Field<uint>("id");
+            modelo.nombre = row.Field<string>("nombre");
+            modelo.fecha_inicio = row.Field<DateTime>("fecha_inicio");
+            modelo.fecha_fin = row.Field<DateTime>("fecha_fin");
+            modelo.cant_ganadores = row.Field<uint>("cant_ganadores");
+            modelo.estado = row.Field<string>("estado");
+            modelo.fk_id_cargo = row.Field<uint>("fk_id_cargo");
+            modelo.fk_id_comite = row.Field<uint>("fk_id_comite");
+            modelo.fk_id_eleccion = row.Field<uint>("fk_id_eleccion");
+            return modelo;
+        }
 
         private static List<Convocatoria> TablaToList(DataTable tabla)
         {
             List<Convocatoria> lista = new List<Convocatoria>();
             foreach (DataRow row in tabla.Rows)
             {
-                Convocatoria modelo = new Convocatoria();
-                modelo.id = row.Field<uint>("id");
-                modelo.nombre = row.Field<string>("nombre");
-                modelo.fecha_inicio = row.Field<DateTime>("fecha_inicio");
-                modelo.fecha_fin = row.Field<DateTime>("fecha_fin");
-                modelo.fk_id_cargo = row.Field<uint>("fk_id_cargo");
-                modelo.fk_id_comite = row.Field<uint>("fk_id_comite");
-                modelo.fk_id_eleccion = row.Field<uint>("fk_id_eleccion");
-                lista.Add(modelo);
+                lista.Add(DataRowToConvocatoria(row));
             }
             return lista;
         }
 
-        public List<Convocatoria> Consultar()
+        public static List<Convocatoria> Consultar()
         {
-            DataTable dt = Conexion.EjecutarSelectMysql("select * from convocatoria");
+            string sql = "";
+            sql += "select id, nombre, fecha_inicio, fecha_fin, cant_ganadores, estado, fk_id_comite, fk_id_eleccion, fk_id_cargo ";
+            sql += "from convocatoria ";
+            sql += "where estado = 'Activo' ";
+            sql += "order by fecha_inicio asc";
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
             return TablaToList(dt);
         }
 
-        public Convocatoria Consultar(int id)
+        public static Convocatoria Consultar(int id)
         {
-            DataTable dt = Conexion.EjecutarSelectMysql("select * from convocatoria where id=" + id.ToString());
+            string sql = "";
+            sql += "select id, nombre, fecha_inicio, fecha_fin, cant_ganadores, estado, fk_id_comite, fk_id_eleccion, fk_id_cargo ";
+            sql += "from convocatoria ";
+            sql += "where estado = 'Activo' ";
+            sql += "and id = " + id + " ";
+            sql += "order by fecha_inicio asc";
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
             return TablaToList(dt).First();
         }
 
-        public void Eliminar(int id)
+        public static void Eliminar(int id)
         {
-            string comando = "delete from convocatoria where id=" + id.ToString();
-            Conexion.EjecutarOperacion(comando);
+            string sql = "";
+            sql += "update convocatoria set ";
+            sql += "estado = 'Inactivo' ";
+            sql += "where id = " + id;
+            Conexion.EjecutarOperacion(sql);
         }
 
-        public void Actualizar(Convocatoria modelo)
+        public static void Actualizar(Convocatoria modelo)
         {
             string comando = "update convocatoria set ";
             comando += "nombre='" + modelo.nombre + "', ";
@@ -55,7 +75,7 @@ namespace SistemaElectoral.Datos.Convocatoria
             Conexion.EjecutarOperacion(comando);
         }
 
-        public void Guardar(Convocatoria modelo)
+        public static void Guardar(Convocatoria modelo)
         {
             string comando = "insert into convocatoria(nombre, fecha_inicio, fecha_fin, fk_id_comite, fk_id_eleccion, fk_id_cargo) values(";
             comando += "'" + modelo.nombre + "',";

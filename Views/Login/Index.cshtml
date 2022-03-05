@@ -21,18 +21,12 @@
 </head>
 <body>
     <div class="login-card">
-        <img class="profile-img-card" src="~/imagenes/login/candado.png">
+        <img class="profile-img-card" src="~/css/imagenes/login/candado.png">
         <form asp-action="Validar" class="form-signin">
             <div class="form-group">
                 <input asp-for="user" class="form-control" type="number" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Usuario" value="">
 
                 <input asp-for="password" class="form-control" type="password" required oninvalid="setCustomValidity('Campo vacio')" oninput="setCustomValidity('')" placeholder="Contraseña" value="">
-                <div class="checkbox">
-                    <div class="form-check">
-                        <input asp-for="recordar" class="form-check-input" type="checkbox" id="formCheck-1">
-                        <label class="form-check-label" for="formCheck-1">Recuerdame</label>
-                    </div>
-                </div>
                 @if(ViewBag.Invalido == true)
                 {
                     <a class="text-danger fw-bold">¡Usuario no encontrado!</a>

@@ -1,0 +1,22 @@
+﻿@model PermisoModel
+
+@{
+    ViewData["Title"] = "Modificar";
+}
+
+<h1 class="text-center text-light">MODIFICAR PERMISO</h1>
+
+
+<form asp-action="Actualizar" method="post">
+    @Html.HiddenFor(m => m.id);
+    @Html.HiddenFor(m => m.estado);
+
+    <div class="form-gruop">
+        <label class="text-light">DESCRIPCION</label>
+        <input asp-for="descripcion" value="@Model.descripcion" class="form-control"/>
+    </div>
+
+    <div class="form-group text-center" id="botones-centro">
+        <button class="btn btn-light" type="submit">Guardar</button>
+    </div>
+</form>

@@ -9,7 +9,8 @@
         {
             string sql = "select id, contraseña from persona ";
             sql += "where id = " + user + " and ";
-            sql += "contraseña = '" + password + "'";
+            sql += "contraseña = '" + password + "' ";
+            sql += "and estado = 'Activo'";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             if (dt.Rows.Count > 0)
             {

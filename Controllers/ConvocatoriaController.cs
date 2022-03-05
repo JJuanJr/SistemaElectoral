@@ -14,7 +14,6 @@ namespace SistemaElectoral.Controllers
 {
     public class ConvocatoriaController : Controller
     {
-        ConvocatoriaData datos = new ConvocatoriaData();
         public IActionResult Index()
         {
             const string nombre_page = "Convocatoria_Index01";
@@ -29,7 +28,7 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            List<Convocatoria> lista = datos.Consultar();
+            List<Convocatoria> lista = ConvocatoriaData.Consultar();
             return View(lista);
         }
 
@@ -47,8 +46,8 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            datos.Eliminar(id);
-            List<Convocatoria> lista = datos.Consultar();
+            ConvocatoriaData.Eliminar(id);
+            List<Convocatoria> lista = ConvocatoriaData.Consultar();
             return View("Index", lista);
         }
 
@@ -78,13 +77,9 @@ namespace SistemaElectoral.Controllers
 
             ViewData["Eleccion"] = EleccionData.Consultar();
 
-            //string sql = "select id, fecha_inicio, fecha_fin from condicion";
-            //DataTable condicion = Conexion.EjecutarSelectMysql(sql);
-            //ViewData["Condicion"] = condicion;
-
-            //ViewData["Condicion_elegidas"] = new List<CondicionModel>();
-
-            return View();
+            Convocatoria modelo = new Convocatoria();
+            modelo.condiciones = CondicionData.ListToSelectList();
+            return View(modelo);
         }
 
         public IActionResult Guardar(Convocatoria modelo)
@@ -101,10 +96,8 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
-            datos.Guardar(modelo);
-            List<Convocatoria> lista = datos.Consultar();
-            return View("Index", lista);
+            ConvocatoriaData.Guardar(modelo);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Modificar(int id)
@@ -122,7 +115,7 @@ namespace SistemaElectoral.Controllers
             }
 
 
-            Convocatoria modelo = datos.Consultar(id);
+            Convocatoria modelo = ConvocatoriaData.Consultar(id);
             ViewData["Cargo"] = CargoData.Consultar();
             ViewData["Eleccion"] = EleccionData.Consultar();
             return View(modelo);
@@ -142,7 +135,7 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            datos.Actualizar(modelo);
+            ConvocatoriaData.Actualizar(modelo);
             return View("Modificar", modelo);
         }
 
@@ -160,7 +153,7 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            Convocatoria modelo = datos.Consultar(id);
+            Convocatoria modelo = ConvocatoriaData.Consultar(id);
             return View(modelo);
         }
 

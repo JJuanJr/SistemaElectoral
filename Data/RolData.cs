@@ -28,7 +28,7 @@ namespace SistemaElectoral.Datos.Rol
             return lista;
         }
 
-        public static void Eliminar(int id)
+        public static void Eliminar(uint id)
         {
             string sql = "";
             sql += "update rol set ";
@@ -59,7 +59,7 @@ namespace SistemaElectoral.Datos.Rol
             return lista;
         }
 
-        public static RolModel Consultar(int id)
+        public static RolModel Consultar(uint id)
         {
             string sql = "";
             sql += "select id, nombre, estado ";
