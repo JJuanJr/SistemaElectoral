@@ -52,13 +52,6 @@ namespace SistemaElectoral.Controllers
 
             InstitucionData.Actualizar(nuevo);
 
-            InstitucionModel modelo = InstitucionData.Consultar();
-            UbicacionModel ubicacion = UbicacionData.Consultar(modelo.fk_id_ubicacion);
-            MunicipioModel municipio = MunicipioData.Consultar(ubicacion.fk_id_municipo);
-            ViewData["Ubicacion"] = ubicacion;
-            ViewData["Municipio"] = municipio;
-
-            //return View("Index", modelo);
             return RedirectToAction("Index");
         }
     }

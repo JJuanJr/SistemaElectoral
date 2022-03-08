@@ -77,14 +77,35 @@ namespace SistemaElectoral.Datos.Convocatoria
 
         public static void Guardar(Convocatoria modelo)
         {
-            string comando = "insert into convocatoria(nombre, fecha_inicio, fecha_fin, fk_id_comite, fk_id_eleccion, fk_id_cargo) values(";
+            string comando = "insert into convocatoria(nombre, fecha_inicio, fecha_fin, cant_ganadores, estado, fk_id_comite, fk_id_eleccion, fk_id_cargo) values(";
             comando += "'" + modelo.nombre + "',";
-            comando += "'" + modelo.fecha_inicio.ToString("yyyy-MM-dd") + "',";
-            comando += "'" + modelo.fecha_fin.ToString("yyyy-MM-dd") + "',";
+            comando += "'" + modelo.fecha_inicio.ToString("yyyy-MM-dd HH-mm") + "',";
+            comando += "'" + modelo.fecha_fin.ToString("yyyy-MM-dd HH-mm") + "',";
+            comando += modelo.cant_ganadores + ",";
+            comando += "'Activo',";
             comando += modelo.fk_id_comite + ",";
             comando += modelo.fk_id_eleccion + ",";
             comando += modelo.fk_id_cargo + ")";
             Conexion.EjecutarOperacion(comando);
+
+            comando = "select id ";
+            comando += "from convocatoria ";
+            comando += "where nombre = '" + modelo.nombre + "'";
+            DataTable dt = Conexion.EjecutarSelectMysql(comando);
+            modelo.id = dt.Rows[0].Field<uint>("id");
+
+            foreach (var item in modelo.condiciones)
+            {
+                if (item.Selected)
+                {
+                    string sql = "";
+                    sql = "insert into condicion_convocatoria(id_condicion, id_convocatoria, estado) values";
+                    sql += "(" + item.Value + ", ";
+                    sql +=  modelo.id + ", ";
+                    sql += "'Activo')";
+                    Conexion.EjecutarOperacion(sql);
+                }
+            }
         }
 
         public static List<EquipoModel> ListarInscriptos(int id)

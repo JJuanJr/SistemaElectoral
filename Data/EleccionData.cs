@@ -15,6 +15,7 @@ namespace SistemaElectoral.Data
                 modelo.id = row.Field<uint>("id");
                 modelo.fecha_inicio = row.Field<DateTime>("fecha_inicio");
                 modelo.fecha_fin = row.Field<DateTime>("fecha_fin");
+                modelo.fecha = modelo.fecha_inicio.ToString() + " - " + modelo.fecha_fin.ToString();
                 lista.Add(modelo);
             }
             return lista;

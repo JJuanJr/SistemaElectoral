@@ -31,9 +31,13 @@
 
         <div class="form-group" id="input-50">
             <label class="text-light">FECHA VOTACIÓN</label>
-            <select asp-for="fk_id_comite" asp-items="@(new SelectList( (ViewData["Comite"] as List<ComiteModel>), "id", "nombre" ))" class="form-control"></select>
+            <select asp-for="fk_id_eleccion" asp-items="@(new SelectList( (ViewData["Eleccion"] as List<EleccionModel>), "id", "fecha" ))" class="form-control"></select>
         </div>
 
+        <div class="form-group">
+            <label class="text-light">CANTIDAD MAXIMA DE GANADORES</label>
+            <input asp-for="cant_ganadores" class="form-control" type="number" required/>
+        </div>
 
         <div class="form-group">
             <label class="text-light">AGREGAR CONDICIONES</label>

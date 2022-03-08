@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using SistemaElectoral.Data;
 using SistemaElectoral.Datos.Rol;
+using Newtonsoft.Json;
 
 namespace SistemaElectoral.Controllers
 {
@@ -78,6 +79,8 @@ namespace SistemaElectoral.Controllers
             ViewData["Eleccion"] = EleccionData.Consultar();
 
             Convocatoria modelo = new Convocatoria();
+            modelo.fecha_inicio = DateTime.Now;
+            modelo.fecha_fin = DateTime.Now;
             modelo.condiciones = CondicionData.ListToSelectList();
             return View(modelo);
         }
@@ -96,6 +99,8 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            PersonaModel persona = JsonConvert.DeserializeObject<PersonaModel>(TempData.Peek("Sesion").ToString());
+            modelo.fk_id_comite = ComiteData.ObtenerComiteSesion(persona).id;
             ConvocatoriaData.Guardar(modelo);
             return RedirectToAction("Index");
         }
