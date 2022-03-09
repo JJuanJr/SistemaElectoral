@@ -62,10 +62,15 @@
         <dt class="text-center" id="input-100">
             CONDICIONES
         </dt>
-        <dd class="form-group form-control">
-            + <br />
-            + <br />
-            +
+        <dd class="form-group">
+            <ol>
+                @for(int i = 0; i < Model.condiciones.Count; i++)
+                {
+                    <li>
+                         <label>@Model.condiciones[i].Text</label>
+                    </li>
+                }
+            </ol>
         </dd>
     </dl>
 
