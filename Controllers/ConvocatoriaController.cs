@@ -72,8 +72,6 @@ namespace SistemaElectoral.Controllers
             }
 
 
-            ViewData["Comite"] = ComiteData.Consultar();
-            
             ViewData["Cargo"] = CargoData.Consultar();
 
             ViewData["Eleccion"] = EleccionData.Consultar();
@@ -105,7 +103,7 @@ namespace SistemaElectoral.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Modificar(int id)
+        public IActionResult Modificar(uint id)
         {
             const string nombre_page = "Convocatoria_Modificar01";
             // Permiso
@@ -141,10 +139,10 @@ namespace SistemaElectoral.Controllers
             }
 
             ConvocatoriaData.Actualizar(modelo);
-            return View("Modificar", modelo);
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Detalle(int id)
+        public IActionResult Detalle(uint id)
         {
             const string nombre_page = "Convocatoria_Detalle01";
             // Permiso

@@ -10,26 +10,29 @@
 
     @Html.HiddenFor(m => m.fk_id_ubicacion)
     @Html.HiddenFor(m => m.logo)
-    @Html.HiddenFor(m => m.fk_id_ubicacion)
 
     <div>
         <label>NOMBRE</label>
-        @Html.EditorFor(m => m.nombre)
+        <input asp-for="nombre" class="form-control" />
+        @*@Html.EditorFor(m => m.nombre)*@
     </div>
 
     <div>
         <label>REGISTRO</label>
-        @Html.EditorFor(m => m.registro)
+        <input asp-for="registro" class="form-control" />
+        @*@Html.EditorFor(m => m.registro)*@
     </div>
 
     <div>
         <label>NOMBRE DEL RECTOR</label>
-        @Html.EditorFor(m => m.nombre_rector)
+        <input asp-for="nombre_rector" class="form-control"/>
+        @*@Html.EditorFor(m => m.nombre_rector)*@
     </div>
 
     <div>
-        <label>TElEFONO</label>
-        @Html.EditorFor(m => m.telefono)
+        <label>TELEFONO</label>
+        <input asp-for="telefono" class="form-control" />
+        @*@Html.EditorFor(m => m.telefono)*@
     </div>
 
     <div>

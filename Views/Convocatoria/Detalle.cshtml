@@ -18,7 +18,7 @@
             @Model.id
         </dd>
            
-         <dt class="form-group" id="input-50">
+        <dt class="form-group" id="input-50">
             NOMBRE
         </dt>
         <dd class="form-group" id="input-50">
@@ -39,19 +39,25 @@
             @Model.fecha_fin
         </dd>
 
-         <dt class="form-group" id="input-50">
+        <dt class="form-group" id="input-50">
+            CANTIDAD MAXIMA DE GANADORES
+        </dt>
+        <dd class="form-group" id="input-50">
+            @Model.cant_ganadores
+        </dd>
+
+        <dt class="form-group" id="input-50">
             CARGO
         </dt>
         <dd class="form-group" id="input-50">
             @CargoData.ObtenerNombreCargo(Model.fk_id_cargo)
         </dd>
 
-         <dt class="form-group" id="input-50">
-            FECHA VOTACIÓN
+        <dt class="form-group" id="input-50">
+            ELECCION
         </dt>
         <dd class="form-group" id="input-50">
-            @EleccionData.ObtenerFecha(Model.fk_id_eleccion)
-            @*@Model.fk_id_eleccion*@
+            @EleccionData.Consultar(Model.fk_id_eleccion).nombre
         </dd>
         <dt class="text-center" id="input-100">
             CONDICIONES

@@ -42,5 +42,6 @@ namespace SistemaElectoral.Data
             List<CargoModel> lista = DataTableToList(dt);
             return lista;
         }
+
     }
 }

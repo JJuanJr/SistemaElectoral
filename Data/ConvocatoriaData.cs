@@ -44,7 +44,7 @@ namespace SistemaElectoral.Datos.Convocatoria
             return TablaToList(dt);
         }
 
-        public static Convocatoria Consultar(int id)
+        public static Convocatoria Consultar(uint id)
         {
             string sql = "";
             sql += "select id, nombre, fecha_inicio, fecha_fin, cant_ganadores, estado, fk_id_comite, fk_id_eleccion, fk_id_cargo ";
@@ -53,7 +53,10 @@ namespace SistemaElectoral.Datos.Convocatoria
             sql += "and id = " + id + " ";
             sql += "order by fecha_inicio asc";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
-            return TablaToList(dt).First();
+            Convocatoria modelo = DataRowToConvocatoria(dt.Rows[0]);
+
+            modelo.condiciones = CondicionData.ListToSelectList(id);
+            return modelo;
         }
 
         public static void Eliminar(int id)
@@ -70,9 +73,22 @@ namespace SistemaElectoral.Datos.Convocatoria
             string comando = "update convocatoria set ";
             comando += "nombre='" + modelo.nombre + "', ";
             comando += "fecha_inicio='" + modelo.fecha_inicio.ToString("yyyy-MM-dd HH-mm") + "', ";
-            comando += "fecha_fin='" + modelo.fecha_fin.ToString("yyyy-MM-dd HH-mm") + "' ";
-            comando += "where id=" + modelo.id.ToString();
+            comando += "fecha_fin='" + modelo.fecha_fin.ToString("yyyy-MM-dd HH-mm") + "', ";
+            comando += "cant_ganadores = " + modelo.cant_ganadores + ", ";
+            comando += "fk_id_eleccion = " + modelo.fk_id_eleccion + ", ";
+            comando += "fk_id_cargo = " + modelo.fk_id_cargo + " ";
+            comando += "where id=" + modelo.id;
             Conexion.EjecutarOperacion(comando);
+
+            foreach (var item in modelo.condiciones)
+            {
+                string sql = "";
+                sql = "replace into condicion_convocatoria(id_condicion, id_convocatoria, estado) values";
+                sql += "(" + item.Value + ", ";
+                sql += modelo.id + ", ";
+                sql += "'" + (item.Selected ? "Activo" : "Inactivo") + "')";
+                Conexion.EjecutarOperacion(sql);
+            }
         }
 
         public static void Guardar(Convocatoria modelo)

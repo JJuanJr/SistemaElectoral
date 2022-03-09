@@ -2,6 +2,29 @@
 
 @{
     ViewBag.Title = "Modificar";
+
+    List<CargoModel> cargos = ViewData["Cargo"] as List<CargoModel>;
+    List<SelectListItem> cargos_select = cargos.ConvertAll(m =>
+    {
+        return new SelectListItem()
+        {
+            Value = m.id.ToString(),
+            Text = m.nombre,
+            Selected = m.id == Model.fk_id_cargo
+        };
+    });
+
+
+    List<EleccionModel> elecciones = ViewData["Eleccion"] as List<EleccionModel>;
+    List<SelectListItem> elecciones_select = elecciones.ConvertAll(m =>
+    {
+        return new SelectListItem()
+        {
+            Value = m.id.ToString(),
+            Text = m.nombre,
+            Selected = m.id == Model.fk_id_eleccion
+        };
+    });
 }
 
 <h2 class="text-light text-center">MODIFICAR CONVOCATORIA</h2>
@@ -28,19 +51,36 @@
         @Html.EditorFor(m => m.fecha_fin, new { htmlAttributes = new { @class = "form-control" } })
     </div>
 
+    <div class="form-group">
+        <label class="text-light">CANTIDAD MAXIMA DE GANADORES</label>
+        <input asp-for="cant_ganadores" class="form-control" type="number" required/>
+    </div>
+
     <div class="form-group" id="size-30">
-            <label class="text-light">CARGO</label>
-            <select asp-for="fk_id_cargo" asp-items="@(new SelectList( (ViewData["Cargo"] as List<CargoModel>), "id", "nombre" ))" class="form-control"></select>
+        <label class="text-light">CARGO</label>
+        <select asp-for="fk_id_cargo" asp-items="@cargos_select" class="form-control"></select>
     </div>
 
     <div class="form-group" id="input-50">
         <label class="text-light">FECHA VOTACIÓN</label>
-        @Html.EditorFor(m => m.fk_id_eleccion, new { htmlAttributes = new { @class = "form-control" } })
+        <select asp-for="fk_id_eleccion" asp-items="@elecciones_select" class="form-control"></select>
     </div>
 
-    <div class="form-group" id="botones-centro">
-        <button class="btn btn-light">Editar Condiciones</button>
-    </div>
+    <div class="form-group">
+            <label class="text-light">AGREGAR CONDICIONES</label>
+            <table class="text-light">
+                @for(int i = 0; i < Model.condiciones.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <input type="hidden" asp-for="@Model.condiciones[i].Value" />
+                            <input asp-for="@Model.condiciones[i].Selected" />
+                            <label>@Model.condiciones[i].Text</label>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
 
     <div class="form-group text-center" id="botones-centro">
         <button class="btn btn-light" type="submit">Guardar Cambios</button>

@@ -45,7 +45,7 @@ namespace SistemaElectoral.Data
                 {
                     Value = m.id.ToString(),
                     Text = m.descripcion,
-                    Selected = TienePermiso(id_conv, m.id)
+                    Selected = TieneCondicion(id_conv, m.id)
                 };
             });
             return condiciones;
@@ -66,7 +66,7 @@ namespace SistemaElectoral.Data
             return condiciones;
         }
 
-        public static bool TienePermiso(uint id_conv, uint id_condicion)
+        public static bool TieneCondicion(uint id_conv, uint id_condicion)
         {
             string sql = "";
             sql += "select id_condicion, id_convocatoria, estado ";
