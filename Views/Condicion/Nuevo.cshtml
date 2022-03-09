@@ -1,0 +1,23 @@
+﻿@model CondicionModel
+
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<h2 class="text-light">CREAR NUEVA CONDICION</h2>
+
+<form asp-action="Guardar" method="post">
+    <div>
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="descripcion" class="form-control"/>
+    </div>
+
+    <div>
+        <button class="btn btn-light" type="submit">CREAR</button>
+    </div>
+</form>
+
+<div class="text-lg-end">
+    <a asp-action="Index" class="text-light">VOLVER</a>
+</div>
+

@@ -25,6 +25,15 @@ namespace SistemaElectoral.Data
             return lista;
         }
 
+        public static void Guardar(CondicionModel modelo)
+        {
+            string sql = "";
+            sql += "insert into condicion(descripcion, estado) values ";
+            sql += "('" + modelo.descripcion + "', ";
+            sql += "'Activo')";
+            Conexion.EjecutarOperacion(sql);
+        }
+
         public static List<CondicionModel> Consultar()
         {
             string sql = "";
@@ -80,6 +89,35 @@ namespace SistemaElectoral.Data
                 return true;
             }
             return false;
+        }
+
+        public static CondicionModel Consultar(uint id)
+        {
+            string sql = "";
+            sql += "select id, descripcion ";
+            sql += "from condicion ";
+            sql += "where estado = 'Activo' ";
+            sql += "and id = " + id;
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
+            return DataRowToCondicion(dt.Rows[0]);
+        }
+
+        public static void Actualizar(CondicionModel modelo)
+        {
+            string sql = "";
+            sql += "update condicion set ";
+            sql += "descripcion = '" + modelo.descripcion + "' ";
+            sql += "where id = " + modelo.id;
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Eliminar(uint id)
+        {
+            string sql = "";
+            sql += "update condicion set ";
+            sql += "estado = 'Inactivo' ";
+            sql += "where id = " + id;
+            Conexion.EjecutarOperacion(sql);
         }
     }
 }

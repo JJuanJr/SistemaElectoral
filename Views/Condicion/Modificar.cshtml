@@ -1,0 +1,24 @@
+﻿@model CondicionModel
+
+@{
+    ViewData["Title"] = "Modificar";
+}
+
+<h2 class="text-light text-center">MODIFICAR</h2>
+
+<form asp-action="Actualizar" method="post">
+    @Html.HiddenFor(m => m.id);
+
+    <div>
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="descripcion" class="form-control"/>
+    </div>
+
+    <div>
+        <button class="btn btn-light" type="submit">GUARDAR</button>
+    </div>
+</form>
+
+<div class="text-lg-end">
+    <a asp-action="Index" class="text-light">VOLVER</a>
+</div>
