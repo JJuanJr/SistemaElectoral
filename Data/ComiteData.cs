@@ -31,7 +31,7 @@ namespace SistemaElectoral.Data
         public static ComiteModel ObtenerComiteSesion(PersonaModel persona)
         {
             string sql = "";
-            sql += "select id, nombre, estado ";
+            sql += "select comite.id, comite.nombre, comite.estado ";
             sql += "from comite ";
             sql += "inner join persona_comite ";
             sql += "on persona_comite.id_persona = " + persona.id + " ";
