@@ -1,0 +1,32 @@
+﻿@model EleccionModel
+
+@{
+    ViewData["Title"] = "Modificar";
+}
+
+<h2 class="text-light text-center">MODIFICAR ELECCION</h2>
+
+<form asp-action="Actualizar" method="post">
+    @Html.HiddenFor(m => m.id);
+
+    <div>
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="nombre" class="form-control"/>
+    </div>
+
+    <div>
+        <label class="text-light">FECHA INICIO</label>
+        @Html.EditorFor(m => m.fecha_inicio, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div>
+        <label class="text-light">FECHA FIN</label>
+        @Html.EditorFor(m => m.fecha_fin, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+
+    <div>
+        <button class="btn btn-light" type="submit">GUARDAR</button>
+    </div>
+</form>
+
+<a asp-action="Index" class="text-light">VOLVER</a>

@@ -1,0 +1,20 @@
+﻿@model ComiteModel
+
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<h2 class="text-light text-center">NUEVO COMITE</h2>
+
+<form asp-action="Guardar" method="post">
+    <div>
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="nombre" class="form-control"/>
+    </div>
+
+    <div>
+        <button class="btn btn-light" type="submit">CREAR</button>
+    </div>
+</form>
+
+<a asp-action="Index" class="text-light">VOLVER</a>

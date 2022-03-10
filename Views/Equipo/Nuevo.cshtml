@@ -1,0 +1,25 @@
+﻿@model EquipoModel
+
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<h2 class="text-light text-center">NUEVO EQUIPO</h2>
+
+<form asp-action="Guardar" method="post">
+    <div>
+        <label class="text-light">NOMBRE</label>
+        <input asp-for="nombre" class="form-control"/>
+    </div>
+
+    <div>
+        <label class="text-light">PARTIDO</label>
+        <select asp-for="fk_id_partido" asp-items="@(new SelectList((ViewData["Partido"] as List<PartidoModel>), "id", "nombre" ))" class="form-control"></select>
+    </div>
+
+    <div>
+        <button class="btn btn-light" type="submit">CREAR</button>
+    </div>
+</form>
+
+<a asp-action="Index" class="text-light">VOLVER</a>

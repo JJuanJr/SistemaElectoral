@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SistemaElectoral.Data;
 using SistemaElectoral.Datos.Rol;
 using SistemaElectoral.Models;
@@ -22,7 +23,9 @@ namespace SistemaElectoral.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            List<EquipoModel> lista = EquipoData.Consultar();
+
+            return View(lista);
         }
 
         public IActionResult Inscriptos(int id)
@@ -42,5 +45,44 @@ namespace SistemaElectoral.Controllers
             List<PersonaModel> lista = EquipoData.ConsultarInscriptos(id);
             return View(lista);
         }
+
+        public IActionResult Nuevo()
+        {
+            ViewData["Partido"] = PartidoData.Consultar();
+            return View();
+        }
+
+        public IActionResult Guardar(EquipoModel modelo)
+        {
+            EquipoData.Guardar(modelo);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Entrar(uint id)
+        {
+            PersonaModel persona = JsonConvert.DeserializeObject<PersonaModel>(TempData.Peek("Sesion").ToString());
+            EquipoData.Entrar(id, persona.id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Modificar(uint id)
+        {
+            EquipoModel modelo = EquipoData.Consultar(id);
+            ViewData["Partido"] = PartidoData.Consultar();
+            return View(modelo);
+        }
+
+        public IActionResult Actualizar(EquipoModel modelo)
+        {
+            EquipoData.Actualizar(modelo);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Eliminar(uint id)
+        {
+            EquipoData.Eliminar(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

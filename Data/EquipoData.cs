@@ -1,4 +1,5 @@
-﻿using SistemaElectoral.Datos;
+﻿using Newtonsoft.Json;
+using SistemaElectoral.Datos;
 using SistemaElectoral.Datos.Persona;
 using SistemaElectoral.Models;
 using System.Data;
@@ -36,10 +37,10 @@ namespace SistemaElectoral.Data
             return nombre;
         }
 
-        public static EquipoModel Consultar(int id)
+        public static EquipoModel Consultar(uint id)
         {
             string sql = "";
-            sql += "select id, nombre, fk_id_partido ";
+            sql += "select id, nombre, estado, fk_id_partido ";
             sql += "from equipo ";
             sql += "where id=" + id;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
@@ -49,26 +50,24 @@ namespace SistemaElectoral.Data
         public static List<EquipoModel> Consultar()
         {
             string sql = "";
-            sql += "select id, nombre, fk_id_partido ";
-            sql += "from equipo";
+            sql += "select id, nombre, estado, fk_id_partido ";
+            sql += "from equipo ";
+            sql += "where estado = 'Activo'";
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             List<EquipoModel> lista = DataTableToList(dt);
             return lista;
         }
 
 
-        public static List<PersonaModel> ConsultarInscriptos(int id)
+        public static List<PersonaModel> ConsultarInscriptos(int id_equipo)
         {
             string sql = "";
-            sql += "select persona.id as id, persona.nombre as nombre, persona.apellido as apellido, persona.edad as edad, persona.genero as genero, persona.fk_id_rol as fk_id_rol ";
+            sql += "select persona.id as id, persona.nombre as nombre, persona.apellido as apellido, persona.edad as edad, persona.genero as genero, persona.foto as foto, persona.fk_id_rol as fk_id_rol ";
             sql += "from persona ";
-            sql += "inner join estudiante ";
-            sql += "on estudiante.id_persona = persona.id ";
-            sql += "inner join equipo_estudiante ";
-            sql += "on equipo_estudiante.id_estudiante = estudiante.id_persona ";
-            sql += "inner join equipo ";
-            sql += "on equipo_estudiante.id_equipo = equipo.id ";
-            sql += "where equipo_estudiante.estado = 'Activo'";
+            sql += "inner join persona_equipo ";
+            sql += "on persona_equipo.id_persona = persona.id ";
+            sql += "where persona_equipo.estado = 'Activo' ";
+            sql += "and persona_equipo.id_equipo = " + id_equipo;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             List<PersonaModel> lista = new List<PersonaModel>();
             foreach (DataRow row in dt.Rows)
@@ -77,6 +76,45 @@ namespace SistemaElectoral.Data
                 lista.Add(modelo);
             }
             return lista;
+        }
+
+        public static void Guardar(EquipoModel modelo)
+        {
+            string sql = "";
+            sql += "insert into equipo(nombre, estado, fk_id_partido) values ";
+            sql += "('" + modelo.nombre + "', ";
+            sql += "'Activo', ";
+            sql += modelo.fk_id_partido + ")";
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Actualizar(EquipoModel modelo)
+        {
+            string sql = "";
+            sql += "update equipo set ";
+            sql += "nombre = '" + modelo.nombre + "', ";
+            sql += "fk_id_partido = " + modelo.fk_id_partido + " ";
+            sql += "where id = " + modelo.id;
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Eliminar(uint id)
+        {
+            string sql = "";
+            sql += "update equipo set ";
+            sql += "estado = 'Inactivo' ";
+            sql += "where id = " + id;
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Entrar(uint id_equipo, ulong id_persona)
+        {
+            string sql = "";
+            sql += "replace into persona_equipo values ";
+            sql += "(" + id_persona + ", ";
+            sql += id_equipo + ", ";
+            sql += "'Activo')";
+            Conexion.EjecutarOperacion(sql);
         }
     }
 }

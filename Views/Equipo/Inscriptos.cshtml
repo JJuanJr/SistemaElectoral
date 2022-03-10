@@ -27,11 +27,11 @@
                     @item.edad
                 </td>
                 <td>
-                    @item.genero
+                    @(item.genero == "M" ? "MASCULINO" : "FEMENINO")
                 </td>
             </tr>
         }
     </table>
 </div>
 
-<a asp-action="Index" asp-controller="Convocatoria" class="text-light">VOLVER</a>
+<a asp-action="Index" class="text-light">VOLVER</a>
