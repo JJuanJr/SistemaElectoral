@@ -136,5 +136,17 @@ namespace SistemaElectoral.Datos.Convocatoria
             List<EquipoModel> lista = EquipoData.DataTableToList(dt);
             return lista;
         }
+
+        public static void Entrar(uint id_conv, ulong id_pers)
+        {
+            EquipoModel equipo = EquipoData.ConsultarPertenece(id_pers);
+
+            string sql = "";
+            sql += "replace into equipo_convocatoria values ";
+            sql += "(" + equipo.id + ", ";
+            sql += id_conv + ", ";
+            sql += "'Pendiente')";
+            Conexion.EjecutarOperacion(sql);
+        }
     }
 }

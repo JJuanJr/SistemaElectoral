@@ -177,5 +177,12 @@ namespace SistemaElectoral.Controllers
             List<EquipoModel> lista = ConvocatoriaData.ListarInscriptos(id);
             return View(lista);
         }
+
+        public IActionResult Entrar(uint id)
+        {
+            PersonaModel persona = JsonConvert.DeserializeObject<PersonaModel>(TempData.Peek("Sesion").ToString());
+            ConvocatoriaData.Entrar(id, persona.id);
+            return RedirectToAction("Index");
+        }
     }
 }

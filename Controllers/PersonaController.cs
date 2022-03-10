@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using SistemaElectoral.Datos;
 using SistemaElectoral.Datos.Persona;
 using SistemaElectoral.Datos.Rol;
@@ -34,11 +35,12 @@ namespace SistemaElectoral.Controllers
             const string nombre_page = "Persona_Detalle01";
             // Permiso
             int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            PersonaModel persona = JsonConvert.DeserializeObject<PersonaModel>(TempData.Peek("Sesion").ToString());
             if (valor_permiso == -1)
             {
                 return RedirectToAction("Index", "Login");
             }
-            else if (valor_permiso == 0)
+            else if (valor_permiso == 0 && persona.id != id)
             {
                 return RedirectToAction("Index", "Home");
             }

@@ -58,6 +58,18 @@ namespace SistemaElectoral.Data
             return lista;
         }
 
+        public static EquipoModel ConsultarPertenece(ulong id_pers)
+        {
+            string sql = "";
+            sql += "select equipo.id, equipo.nombre, equipo.estado, equipo.fk_id_partido ";
+            sql += "from equipo ";
+            sql += "inner join persona_equipo on persona_equipo.id_persona = " + id_pers + " ";
+            sql += "where equipo.estado = 'Activo' ";
+            sql += "and persona_equipo.estado = 'Activo'";
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
+            return DataRowToEquipo(dt.Rows[0]);
+        }
+
 
         public static List<PersonaModel> ConsultarInscriptos(int id_equipo)
         {
