@@ -32,7 +32,7 @@ namespace SistemaElectoral.Datos.Persona
 
         public static void Guardar(PersonaModel modelo)
         {
-            modelo.foto = modelo.id + ".png";
+            modelo.foto = "personas\\" + modelo.id + ".png";
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\css\\imagenes", modelo.foto);
             using var stream = new FileStream(path, FileMode.Create);
             modelo.foto_file.CopyTo(stream);

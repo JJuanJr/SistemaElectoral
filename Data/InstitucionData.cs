@@ -32,7 +32,7 @@ namespace SistemaElectoral.Data
         {
             if (modelo.imagen != null)
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), modelo.logo);
+                string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot\\css\\imagenes\\home", modelo.logo);
                 using var stream = new FileStream(path, FileMode.Create);
                 modelo.imagen.CopyTo(stream);
             }

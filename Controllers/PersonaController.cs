@@ -89,12 +89,37 @@ namespace SistemaElectoral.Controllers
 
         public IActionResult Eliminar(ulong id)
         {
+            const string nombre_page = "Persona_Eliminar01";
+            // Permiso
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
             PersonaData.Eliminar(id);
             return RedirectToAction("Index");
         }
 
         public IActionResult Modificar(ulong id)
         {
+            const string nombre_page = "Persona_Modificar01";
+            // Permiso
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             PersonaModel modelo = PersonaData.Consultar(id);
             ViewData["Rol"] = RolData.Consultar();
             return View(modelo);
@@ -102,6 +127,18 @@ namespace SistemaElectoral.Controllers
 
         public IActionResult Actualizar(PersonaModel modelo)
         {
+            const string nombre_page = "Persona_Actualizar01";
+            // Permiso
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             PersonaData.Actualizar(modelo);
             return RedirectToAction("Index");
         }

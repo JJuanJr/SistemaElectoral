@@ -52,11 +52,6 @@ namespace SistemaElectoral.Controllers
             return View("Index", lista);
         }
 
-        public IActionResult Detalles()
-        {
-            return View();
-        }
-
         public IActionResult Nuevo()
         {
             const string nombre_page = "Convocatoria_Nuevo01";
@@ -180,6 +175,19 @@ namespace SistemaElectoral.Controllers
 
         public IActionResult Entrar(uint id)
         {
+            const string nombre_page = "Convocatoria_Entrar01";
+            // Permiso
+            int valor_permiso = RolData.TienePermiso(TempData.Peek("Sesion"), nombre_page);
+            if (valor_permiso == -1)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else if (valor_permiso == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
             PersonaModel persona = JsonConvert.DeserializeObject<PersonaModel>(TempData.Peek("Sesion").ToString());
             ConvocatoriaData.Entrar(id, persona.id);
             return RedirectToAction("Index");
