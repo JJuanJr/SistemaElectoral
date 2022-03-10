@@ -1,0 +1,31 @@
+﻿@model List<PartidoModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-light text-center">LISTA DE PARTIDOS</h2>
+
+
+<a asp-action="Nuevo" class="text-light">CREAR NUEVO PARTIDO</a>
+
+<div class="table-responsive">
+    <table class="table text-light table-bordered">
+        <tr class="text-center">
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>OPCIONES</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.nombre</td>
+                <td class="text-center">
+                    <a asp-action="Modificar" asp-route-id="@item.id" class="text-light">MODIFICAR</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.id" class="text-light">ELIMINAR</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

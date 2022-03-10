@@ -35,6 +35,16 @@ namespace SistemaElectoral.Data
             return DataTableToList(dt);
         }
 
+        public static PartidoModel Consultar(uint id)
+        {
+            string sql = "";
+            sql += "select id, nombre, estado ";
+            sql += "from partido ";
+            sql += "where id = " + id;
+            DataTable dt = Conexion.EjecutarSelectMysql(sql);
+            return DataRowToPartido(dt.Rows[0]);
+        }
+
         public static string ObtenerNombrePartido(uint id)
         {
             string sql = "";
@@ -43,6 +53,33 @@ namespace SistemaElectoral.Data
             sql += "where id = " + id;
             DataTable dt = Conexion.EjecutarSelectMysql(sql);
             return dt.Rows[0].Field<string>("nombre");
+        }
+
+        public static void Guardar(PartidoModel modelo)
+        {
+            string sql = "";
+            sql += "insert into partido(nombre, estado) values ";
+            sql += "('" + modelo.nombre + "', ";
+            sql += "'Activo')";
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Actualizar(PartidoModel modelo)
+        {
+            string sql = "";
+            sql += "update partido set ";
+            sql += "nombre = '" + modelo.nombre + "' ";
+            sql += "where id = " + modelo.id;
+            Conexion.EjecutarOperacion(sql);
+        }
+
+        public static void Eliminar(uint id)
+        {
+            string sql = "";
+            sql += "update partido set ";
+            sql += "estado = 'Inactivo' ";
+            sql += "where id = " + id;
+            Conexion.EjecutarOperacion(sql);
         }
     }
 }
